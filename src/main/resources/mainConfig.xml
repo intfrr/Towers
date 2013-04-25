@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:mainConfig xmlns:tns="http://lineup/util/config"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://lineup/util/config ../xsd/lineup.xsd ">
+	
+	<tns:levels>
+		<tns:level sequence="1">
+			<tns:base sequence="0">
+				<tns:x>102</tns:x>
+				<tns:y>118</tns:y>
+			</tns:base>
+			<tns:route>
+				<tns:waypoint sequence="1">
+					<tns:x>9</tns:x>
+					<tns:y>176</tns:y>
+				</tns:waypoint>
+				<tns:waypoint sequence="2">
+					<tns:x>175</tns:x>
+					<tns:y>141</tns:y>
+				</tns:waypoint>
+				<tns:waypoint sequence="3">
+					<tns:x>133</tns:x>
+					<tns:y>29</tns:y>
+				</tns:waypoint>
+				<tns:waypoint sequence="4">
+					<tns:x>35</tns:x>
+					<tns:y>57</tns:y>
+				</tns:waypoint>
+			</tns:route>
+			<tns:background>/backgrounds/lvl1.jpg</tns:background>
+			<tns:waves>
+				<tns:wave sequence="1">
+					<tns:creepRef>blue</tns:creepRef>
+					<tns:interval>5</tns:interval>
+					<tns:count>3</tns:count>
+				</tns:wave>
+				<tns:wave sequence="2">
+					<tns:creepRef>red</tns:creepRef>
+					<tns:interval>2</tns:interval>
+					<tns:count>8</tns:count>
+				</tns:wave>
+			</tns:waves>
+		</tns:level>
+	</tns:levels>
+	
+	<tns:creeps>
+		<tns:creep ref="blue">
+			<tns:fqName>lineup.model.implementations.BlueCreep</tns:fqName>
+		</tns:creep>
+		<tns:creep ref="red">
+			<tns:fqName>lineup.model.implementations.RedCreep</tns:fqName>
+		</tns:creep>
+	</tns:creeps>
+	
+</tns:mainConfig>

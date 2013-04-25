@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://lineup/util/config"
+        xmlns:tns="http://lineup/util/config"
+        elementFormDefault="qualified">
+
+
+    <element name="mainConfig" type="tns:MainConfig"></element>
+    
+    <complexType name="MainConfig">
+    	<sequence>
+    		<element name="levels" type="tns:LevelList"></element>
+    		<element name="creeps" type="tns:CreepList"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CreepList">
+    	<sequence>
+    		<element name="creep" type="tns:CreepConfig" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="CreepConfig">
+    	<sequence>
+    		<element name="fqName" type="string" maxOccurs="1" minOccurs="1">
+    		</element>
+    	</sequence>
+    	<attribute name="ref" type="string"></attribute>
+    </complexType>
+    
+
+
+
+
+    <complexType name="LevelList">
+    	<sequence>
+    		<element name="level" type="tns:LevelConfig" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="LevelConfig">
+    	<sequence>
+    		<element name="base" type="tns:Waypoint"></element>
+    		<element name="route" type="tns:Route"></element>
+    		<element name="background" type="string"></element>
+    		<element name="waves" type="tns:WaveList"></element>
+    	</sequence>
+    	<attribute name="sequence" type="int"></attribute>
+    </complexType>
+
+    <complexType name="Waypoint">
+    	<sequence>
+    		<element name="x" type="int"></element>
+    		<element name="y" type="int"></element>
+    	</sequence>
+    	<attribute name="sequence" type="int"></attribute>
+    </complexType>
+
+    <complexType name="Route">
+    	<sequence>
+    		<element name="waypoint" type="tns:Waypoint" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="WaveConfig">
+    	<sequence>
+    		<element name="creepRef" type="string"></element>
+    		<element name="interval" type="int"></element>
+    		<element name="count" type="int"></element>
+    	</sequence>
+    	<attribute name="sequence" type="int"></attribute>
+    </complexType>
+
+    <complexType name="WaveList">
+    	<sequence>
+    		<element name="wave" type="tns:WaveConfig" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>
