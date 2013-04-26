@@ -35,5 +35,8 @@ public class StatsPanel extends JPanel {
     
     int lives = World.getInstance().getLives();
     g.drawString(lives + " lives", 5, 20);
+    
+    g.setColor(Color.YELLOW);
+    g.drawString("$ " + World.getInstance().getMoney(), 5, 80);
   }
 }

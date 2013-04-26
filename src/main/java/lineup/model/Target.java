@@ -3,12 +3,12 @@ package lineup.model;
 public class Target {
 
   private int priority;
-  private Location location;
+  private Creep creep;
   
   
-  public Target(int priority, Location location) {
+  public Target(int priority, Creep creep) {
     this.priority = priority;
-    this.location = location;
+    this.creep = creep;
   }
 
   public int getPriority() {
@@ -19,12 +19,12 @@ public class Target {
     this.priority = priority;
   }
 
-  public Location getLocation() {
-    return location;
+  public void setCreep(Creep creep) {
+    this.creep = creep;
   }
 
-  public void setLocation(Location location) {
-    this.location = location;
+  public Creep getCreep() {
+    return creep;
   }
   
 }

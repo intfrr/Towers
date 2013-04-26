@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import lineup.world.Renderable;
 import lineup.world.Updateable;
 import lineup.world.World;
@@ -41,7 +43,8 @@ public abstract class Bunker extends Storage implements Renderable, Updateable {
     }
   }
   
-  public void borderRender(Graphics g) {
+  public void borderRender(JPanel view) {
+    Graphics g = view.getGraphics();
     if (selected) {
       g.setColor(Color.CYAN);
       g.drawRect((int)getLocation().x - 1, (int)getLocation().y - 1, getSize() + 1, getSize() + 1);
@@ -50,7 +53,7 @@ public abstract class Bunker extends Storage implements Renderable, Updateable {
         g.drawOval((int)location.x - tracking.getRange() + getSize()/2 - 1, (int)location.y - tracking.getRange() + getSize()/2 - 1, tracking.getRange()*2, tracking.getRange()*2);
       }
     }
-    render(g);
+    render(view);
   }
 
   public Location getLocation() {

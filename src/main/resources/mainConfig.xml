@@ -45,10 +45,10 @@
 	
 	<tns:creeps>
 		<tns:creep ref="blue">
-			<tns:fqName>lineup.model.implementations.BlueCreep</tns:fqName>
+			<tns:fqName>lineup.model.implementations.creeps.BlueCreep</tns:fqName>
 		</tns:creep>
 		<tns:creep ref="red">
-			<tns:fqName>lineup.model.implementations.RedCreep</tns:fqName>
+			<tns:fqName>lineup.model.implementations.creeps.RedCreep</tns:fqName>
 		</tns:creep>
 	</tns:creeps>
 	

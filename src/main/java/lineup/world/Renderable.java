@@ -1,9 +1,9 @@
 package lineup.world;
 
-import java.awt.Graphics;
+import javax.swing.JPanel;
 
 public interface Renderable {
 
-  public void render(Graphics g);
+  public void render(JPanel view);
   
 }

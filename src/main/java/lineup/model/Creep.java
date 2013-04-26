@@ -87,5 +87,7 @@ public abstract class Creep implements Renderable, Updateable {
   public abstract Creep copy();
   
   public abstract int getSize();
+  
+  public abstract int getValue();
 
 }

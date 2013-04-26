@@ -8,12 +8,15 @@ Tracking devices handle target selection and relay targets to the weapon, which 
 
 Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic but fine for now.
 
+##### 26 April 2013
+
+ - Added creep health and projectile damage
+ - Killing creeps now gives money
+ - Added cruise launcher which fires really cool seeking missiles!
 
 ### TODO
 
- - Creep health (just get 1-shot at the mo)
  - Ability to build bunkers
-  - gold for killing creeps
   - ui to handle it
  - More focus on bunkers, ability to change tracking and weapons
  - Better UI - more stuff in the panels

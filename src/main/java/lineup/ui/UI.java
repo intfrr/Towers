@@ -56,15 +56,15 @@ public class UI {
     g.drawImage(world.getLevel().getBackground(), 0, 0, null);
     
     for (Bunker b : world.getBunkers()) {
-      b.borderRender(g);
+      b.borderRender(view);
     }
     
     for (Creep c : world.getCreeps()) {
-      c.render(g);
+      c.render(view);
     }
     
     for (Projectile p : world.getProjectiles()) {
-      p.render(g);
+      p.render(view);
     }
     
     Location base = World.getInstance().getLevel().getBase();

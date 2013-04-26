@@ -73,4 +73,6 @@ public abstract class Projectile implements Renderable, Updateable {
   public int getSize() {
     return size;
   }
+  
+  public abstract int getDamage();
 }

@@ -30,7 +30,10 @@ public class World {
   private Level level;
   private int waveCooldown = 2000;
   private boolean onCooldown = true;
+  
+  //Player attributes
   private int lives = 10;
+  private int money = 0;
   
   private final int width;
   private final int height;
@@ -151,10 +154,13 @@ public class World {
       while (prit.hasNext()) {
         Projectile projectile = prit.next();
         if (creepRect.intersects(projectile.getBoundingRect())) {
-          //TODO creep health
-          projectile.getOwner().incrementKills();
-          crip.remove();
           prit.remove();
+          creep.setHealth(creep.getHealth() - projectile.getDamage());
+          if (creep.getHealth() <= 0) {
+            money += creep.getValue();
+            projectile.getOwner().incrementKills();
+            crip.remove();
+          }
         }
         
       }
@@ -211,5 +217,13 @@ public class World {
   
   public Wave getCurrentWave() {
     return level.getWaves().getFirst(); 
+  }
+
+  public void setMoney(int money) {
+    this.money = money;
+  }
+
+  public int getMoney() {
+    return money;
   }
 }

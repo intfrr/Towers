@@ -5,8 +5,8 @@ import lineup.model.Creep;
 import lineup.model.Level;
 import lineup.model.Location;
 import lineup.model.Wave;
-import lineup.model.implementations.BlueCreep;
-import lineup.model.implementations.SmallBunker;
+import lineup.model.implementations.creeps.BlueCreep;
+import lineup.model.implementations.bunkers.SmallBunker;
 import lineup.ui.UI;
 import lineup.world.World;
 
