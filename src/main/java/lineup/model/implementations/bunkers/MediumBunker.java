@@ -10,23 +10,23 @@ import lineup.model.implementations.arms.Cannon;
 import lineup.model.implementations.trackers.BasicTracker;
 
 /**
- * Small bunker with 10 size.
+ * Medium bunker with 15 size.
  * Contains a Cannon and BasicTracker.
  * @author 38183Ne
  *
  */
-public class SmallBunker extends Bunker {
+public class MediumBunker extends Bunker {
 
   private Image sprite;
   
   /**
    * Constructor.
    */
-  public SmallBunker() {
-    super(10, 50);
+  public MediumBunker() {
+    super(15, 100);
     setArms(new Cannon(this));
     setTracking(new BasicTracker());
-    sprite = loadSprite(BunkerType.S);
+    sprite = loadSprite(BunkerType.M);
   }
 
   public void render(JPanel view) {
@@ -36,7 +36,7 @@ public class SmallBunker extends Bunker {
 
   @Override
   public String getName() {
-    return "Small Bunker";
+    return "Medium Bunker";
   }
 
 }

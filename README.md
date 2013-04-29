@@ -14,10 +14,13 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
  - Killing creeps now gives money
  - Added cruise launcher which fires really cool seeking missiles!
 
-### TODO
+##### 29 April 2013
 
  - Ability to build bunkers
-  - ui to handle it
+
+### TODO
+
+ - Double buffer display
  - More focus on bunkers, ability to change tracking and weapons
  - Better UI - more stuff in the panels
  - Ammo storage module

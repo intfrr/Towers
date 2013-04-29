@@ -14,7 +14,7 @@ public class ControlPanel extends JPanel {
   private StatsPanel statsPanel;
   private WavesPanel wavesPanel;
   
-  public ControlPanel(int width) {
+  public ControlPanel(int width, UI ui) {
     super();
     setSize(width, 150);
     setPreferredSize(getSize());
@@ -23,7 +23,7 @@ public class ControlPanel extends JPanel {
     
     statsPanel = new StatsPanel(width);
     bunkerPanel = new BunkerPanel(width);
-    wavesPanel = new WavesPanel(width);
+    wavesPanel = new WavesPanel(ui, width);
     add(statsPanel);
     add(bunkerPanel);
     add(wavesPanel);

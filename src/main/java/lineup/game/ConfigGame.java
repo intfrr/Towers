@@ -12,13 +12,13 @@ public class ConfigGame {
   private UI ui;
   
   public static void main(String[] args) {
-    ConfigGame game = new ConfigGame(200, 200);
+    ConfigGame game = new ConfigGame(300, 200);
     game.start();
   }
 
   public ConfigGame(int width, int height) {
-    ui = new UI(width, height);
     World.init(width, height);
+    ui = new UI(width, height);
     
     LevelFactory factory = LevelFactory.getInstance();
     World.getInstance().setLevel(factory.getLevel(0));

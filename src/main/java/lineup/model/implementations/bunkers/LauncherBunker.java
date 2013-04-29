@@ -24,7 +24,7 @@ public class LauncherBunker extends Bunker {
    * Constructor.
    */
   public LauncherBunker() {
-    super(10);
+    super(10, 100);
     setArms(new CruiseLauncher(this));
     setTracking(new HiPowerBasicTracker());
   }

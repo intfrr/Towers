@@ -2,11 +2,17 @@ package lineup.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import lineup.model.implementations.bunkers.LargeBunker;
+import lineup.model.implementations.bunkers.MediumBunker;
+import lineup.model.implementations.bunkers.SmallBunker;
 import lineup.world.Renderable;
 import lineup.world.Updateable;
 import lineup.world.World;
@@ -18,18 +24,23 @@ import lineup.world.World;
  */
 public abstract class Bunker extends Storage implements Renderable, Updateable {
   
+  public enum BunkerType {S, M, L}
+  
   private Location location;
   private TrackingSystem tracking;
   private Arms arms;
   private boolean selected;
   private int kills;
+  private int cost;
   
   /**
    * Constructor.
    * @param size
+   * @param cost
    */
-  public Bunker(int size) {
+  public Bunker(int size, int cost) {
     super(size);
+    this.cost = cost;
   }
   
   public void update(int elapsed) {
@@ -106,8 +117,40 @@ public abstract class Bunker extends Storage implements Renderable, Updateable {
     return kills;
   }
   
+  public int getCost() {
+    return cost;
+  }
+  
   public Location getCentreLocation() {
     return new Location(location.x + getSize()/2, location.y + getSize()/2);
+  }
+  
+  protected Image loadSprite(BunkerType type) {
+    try {
+      String path = "/sprites/bunker_" + type.name() + ".png";
+      return ImageIO.read(this.getClass().getResourceAsStream(path));
+    } catch (IOException io) {
+      throw new RuntimeException("Failed to load bunker imagee " +  io);
+    }
+  }
+
+  public static Bunker create(BunkerType type, int x, int y) {
+    Bunker bunker = null;
+    switch (type) {
+      case S:
+        bunker = new SmallBunker();
+        break;
+      case M:
+        bunker = new MediumBunker();
+        break;
+      case L:
+        bunker = new LargeBunker();
+        break;
+      default:
+        throw new RuntimeException("Unknown bunker type " + type); 
+    }
+    bunker.setLocation(x, y);
+    return bunker;
   }
 
 }

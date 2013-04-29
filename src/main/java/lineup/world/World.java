@@ -2,6 +2,7 @@ package lineup.world;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -33,7 +34,8 @@ public class World {
   
   //Player attributes
   private int lives = 10;
-  private int money = 0;
+  private Integer money = 500;
+  private PropertyChangeSupport moneyProp = new PropertyChangeSupport(money);
   
   private final int width;
   private final int height;
@@ -220,10 +222,23 @@ public class World {
   }
 
   public void setMoney(int money) {
+    moneyProp.firePropertyChange("money", this.money.intValue(), money);
     this.money = money;
   }
 
   public int getMoney() {
     return money;
+  }
+
+  public void removeMoney(int cost) {
+    if (money < cost) {
+      throw new RuntimeException("Can't afford");
+    }
+    moneyProp.firePropertyChange("money", this.money.intValue(), money - cost);
+    money = money - cost;
+  }
+  
+  public PropertyChangeSupport getMoneyProp() {
+    return moneyProp;
   }
 }
