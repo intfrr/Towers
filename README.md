@@ -4,6 +4,8 @@ Playing around at writing a tower defence game. Trying a slightly new concept of
 
 Tracking devices handle target selection and relay targets to the weapon, which fires at them.
 
+![Screenshot](https://github.com/qwerky/Towers/raw/master/screenshot.png)
+
 ##### 25 April 2013
 
 Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic but fine for now.
