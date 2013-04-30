@@ -27,7 +27,7 @@
 					<tns:y>57</tns:y>
 				</tns:waypoint>
 			</tns:route>
-			<tns:background>/backgrounds/lvl1.jpg</tns:background>
+			<tns:background>lvl1.jpg</tns:background>
 			<tns:waves>
 				<tns:wave sequence="1">
 					<tns:creepRef>blue</tns:creepRef>

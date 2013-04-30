@@ -1,8 +1,5 @@
 package lineup.util;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Source;
@@ -23,6 +19,7 @@ import lineup.model.Creep;
 import lineup.model.Level;
 import lineup.model.Location;
 import lineup.model.Wave;
+import lineup.ui.util.ImageLoader;
 import lineup.util.config.CreepConfig;
 import lineup.util.config.LevelConfig;
 import lineup.util.config.MainConfig;
@@ -75,7 +72,7 @@ public class LevelFactory {
     
     LevelConfig config = levelConfig.get(i);
     level.setBase(createLocation(config.getBase()));
-    level.setBackground(loadBackground(config.getBackground()));
+    level.setBackground(ImageLoader.loadBackground(config.getBackground()));
     
     try {
       List<Location> route = createRoute(config.getRoute().getWaypoint());
@@ -85,17 +82,6 @@ public class LevelFactory {
     } 
     
     return level;
-  }
-
-  
-  private Image loadBackground(String path) {
-    BufferedImage img = null;
-    try {
-      img = ImageIO.read(getClass().getResourceAsStream(path));
-    } catch (IOException io) {
-      throw new RuntimeException("Failed to load background image " + path, io);
-    }
-    return img;
   }
 
 

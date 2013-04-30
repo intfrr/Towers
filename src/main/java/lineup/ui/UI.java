@@ -1,12 +1,12 @@
 package lineup.ui;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.WindowConstants;
 
@@ -21,7 +21,7 @@ import lineup.world.World;
 public class UI {
 
   private JFrame frame;
-  private JPanel view;
+  private Canvas view;
   private ControlPanel controls;
   
   public enum Mode {NORMAL, BUILD_BUNKER}
@@ -39,7 +39,7 @@ public class UI {
     frame = new JFrame("Lineup");
     frame.setSize(width, height+168);
     
-    view = new JPanel();
+    view = new Canvas();
     view.setSize(width, height);
     view.setPreferredSize(view.getSize());
     
@@ -62,29 +62,40 @@ public class UI {
   
   public void launch() {
     frame.setVisible(true);
+    view.createBufferStrategy(2);
   }
   
   
   public void display(World world) {
-    Graphics g = view.getGraphics();
-
-    g.drawImage(world.getLevel().getBackground(), 0, 0, null);
-    
-    for (Bunker b : world.getBunkers()) {
-      b.borderRender(view);
+    //Graphics g = view.getGraphics();
+    Graphics g = null;
+    try {
+      g = view.getBufferStrategy().getDrawGraphics();
+  
+      g.drawImage(world.getLevel().getBackground(), 0, 0, null);
+      
+      for (Bunker b : world.getBunkers()) {
+        b.borderRender(g);
+      }
+      
+      for (Creep c : world.getCreeps()) {
+        c.render(g);
+      }
+      
+      for (Projectile p : world.getProjectiles()) {
+        p.render(g);
+      }
+      
+      Location base = World.getInstance().getLevel().getBase();
+      g.setColor(Color.ORANGE);
+      g.fillOval((int)base.x - 5, (int)base.y - 5, 10, 10);
+      
+    } finally {
+      if (g != null) {
+        g.dispose();
+      }
     }
-    
-    for (Creep c : world.getCreeps()) {
-      c.render(view);
-    }
-    
-    for (Projectile p : world.getProjectiles()) {
-      p.render(view);
-    }
-    
-    Location base = World.getInstance().getLevel().getBase();
-    g.setColor(Color.ORANGE);
-    g.fillOval((int)base.x - 5, (int)base.y - 5, 10, 10);
+    view.getBufferStrategy().show();
     
     controls.repaint();
   }

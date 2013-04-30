@@ -5,8 +5,6 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JPanel;
-
 import lineup.model.Creep;
 import lineup.model.Location;
 
@@ -23,8 +21,7 @@ public class BlueCreep extends Creep {
   private int size = 6;
   private Color color = Color.BLUE;
   
-  public void render(JPanel view) {
-    Graphics g = view.getGraphics();
+  public void render(Graphics g) {
     g.setColor(color);
     g.fillOval((int)getLocation().x, (int)getLocation().y, size, size);
   }

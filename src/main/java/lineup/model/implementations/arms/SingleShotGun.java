@@ -11,7 +11,7 @@ import lineup.model.Target;
 
 /**
  * Generic single projectile firing Arms.
- * @author 38183Ne
+ * @author Neil
  */
 public abstract class SingleShotGun implements Arms {
 

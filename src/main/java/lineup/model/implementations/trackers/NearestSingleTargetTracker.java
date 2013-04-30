@@ -12,7 +12,7 @@ import lineup.model.TrackingSystem;
 /**
  * TrackingSystem implementation that targets a single creep,
  * the nearest one in range.
- * @author 38183Ne
+ * @author Neil
  */
 public class NearestSingleTargetTracker implements TrackingSystem {
 

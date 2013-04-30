@@ -3,8 +3,6 @@ package lineup.model.implementations.bunkers;
 import java.awt.Graphics;
 import java.awt.Image;
 
-import javax.swing.JPanel;
-
 import lineup.model.Bunker;
 import lineup.model.implementations.arms.Cannon;
 import lineup.model.implementations.trackers.BasicTracker;
@@ -12,7 +10,7 @@ import lineup.model.implementations.trackers.BasicTracker;
 /**
  * Small bunker with 10 size.
  * Contains a Cannon and BasicTracker.
- * @author 38183Ne
+ * @author Neil
  *
  */
 public class SmallBunker extends Bunker {
@@ -29,8 +27,7 @@ public class SmallBunker extends Bunker {
     sprite = loadSprite(BunkerType.S);
   }
 
-  public void render(JPanel view) {
-    Graphics g = view.getGraphics();
+  public void render(Graphics g) {
     g.drawImage(sprite, (int)getLocation().x, (int)getLocation().y, null);
   }
 

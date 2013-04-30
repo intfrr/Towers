@@ -16,7 +16,7 @@ import lineup.model.Wave;
 
 /**
  * Encapsulates the state of the world.
- * @author 38183Ne
+ * @author Neil
  */
 public class World {
 

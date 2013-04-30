@@ -3,7 +3,6 @@ package lineup.model.implementations.projectiles;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.JPanel;
 
 import lineup.model.Bunker;
 import lineup.model.Projectile;
@@ -17,8 +16,7 @@ public class Shell extends Projectile {
     super(owner, x, y, velocity/1000.0, bearing, 2);
   }
 
-  public void render(JPanel view) {
-    Graphics g = view.getGraphics();
+  public void render(Graphics g) {
     g.setColor(color);
     g.fillOval((int)getX(), (int)getY(), getSize(), getSize());
   }

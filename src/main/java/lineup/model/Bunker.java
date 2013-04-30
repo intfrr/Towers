@@ -4,22 +4,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
 import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import lineup.model.implementations.bunkers.LargeBunker;
 import lineup.model.implementations.bunkers.MediumBunker;
 import lineup.model.implementations.bunkers.SmallBunker;
+import lineup.ui.util.ImageLoader;
 import lineup.world.Renderable;
 import lineup.world.Updateable;
 import lineup.world.World;
 
 /**
  * Base bunker class.
- * @author 38183Ne
+ * @author Neil
  *
  */
 public abstract class Bunker extends Storage implements Renderable, Updateable {
@@ -54,8 +51,7 @@ public abstract class Bunker extends Storage implements Renderable, Updateable {
     }
   }
   
-  public void borderRender(JPanel view) {
-    Graphics g = view.getGraphics();
+  public void borderRender(Graphics g) {
     if (selected) {
       g.setColor(Color.CYAN);
       g.drawRect((int)getLocation().x - 1, (int)getLocation().y - 1, getSize() + 1, getSize() + 1);
@@ -64,7 +60,7 @@ public abstract class Bunker extends Storage implements Renderable, Updateable {
         g.drawOval((int)location.x - tracking.getRange() + getSize()/2 - 1, (int)location.y - tracking.getRange() + getSize()/2 - 1, tracking.getRange()*2, tracking.getRange()*2);
       }
     }
-    render(view);
+    render(g);
   }
 
   public Location getLocation() {
@@ -126,12 +122,7 @@ public abstract class Bunker extends Storage implements Renderable, Updateable {
   }
   
   protected Image loadSprite(BunkerType type) {
-    try {
-      String path = "/sprites/bunker_" + type.name() + ".png";
-      return ImageIO.read(this.getClass().getResourceAsStream(path));
-    } catch (IOException io) {
-      throw new RuntimeException("Failed to load bunker imagee " +  io);
-    }
+    return ImageLoader.loadSprite("bunker_" + type.name() + ".png");
   }
 
   public static Bunker create(BunkerType type, int x, int y) {

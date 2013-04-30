@@ -8,7 +8,7 @@ import lineup.exception.DoesntFitException;
 
 /**
  * Basic Container implementation.
- * @author 38183Ne
+ * @author Neil
  *
  */
 public class Storage implements Container {

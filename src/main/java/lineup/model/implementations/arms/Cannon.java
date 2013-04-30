@@ -10,7 +10,7 @@ import lineup.model.implementations.arms.SingleShotGun;
 /**
  * Cannon with 5 sec reload that fires Shells directly
  * at the target with no leading.
- * @author 38183Ne
+ * @author Neil
  */
 public class Cannon extends SingleShotGun {
 

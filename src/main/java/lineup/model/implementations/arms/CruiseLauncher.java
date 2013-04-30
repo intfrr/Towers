@@ -10,7 +10,7 @@ import lineup.model.implementations.arms.SingleShotGun;
 /**
  * Missile launcher with 8 sec reload that fires cruise
  * missiles.
- * @author 38183Ne
+ * @author Neil
  */
 public class CruiseLauncher extends SingleShotGun {
 

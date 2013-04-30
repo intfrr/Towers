@@ -2,7 +2,7 @@ package lineup.model;
 
 /**
  * Thing that can't store other things.
- * @author 38183Ne
+ * @author Neil
  *
  */
 public class Item {

@@ -1,17 +1,14 @@
 package lineup.model.implementations.projectiles;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import lineup.model.Bunker;
 import lineup.model.Creep;
 import lineup.model.Projectile;
+import lineup.ui.util.ImageLoader;
 
 public class CruiseMissile extends Projectile {
 
@@ -23,17 +20,17 @@ public class CruiseMissile extends Projectile {
   public CruiseMissile(Bunker owner, int x, int y, double bearing, Creep target) {
     super(owner, x, y, velocity/1000.0, bearing, 5);
     this.target = target;
-    sprite = loadSprite("/sprites/cruisemissile.png");
+    sprite = ImageLoader.loadSprite("cruisemissile.png");
   }
 
-  public void render(JPanel view) {
-    Graphics2D g2 = (Graphics2D)view.getGraphics();
+  public void render(Graphics g) {
+    Graphics2D g2 = (Graphics2D)g;
     AffineTransform xform = new AffineTransform();
     xform.setTransform(identity);
     xform.translate(getX(), getY());
     xform.rotate(getBearing() + Math.PI/2, 3, 3);
     
-    g2.drawImage(sprite, xform, view);
+    g2.drawImage(sprite, xform, null);
   }
 
   /**
@@ -55,15 +52,6 @@ public class CruiseMissile extends Projectile {
     setBearing(Math.atan2(dy, dx));
   }
   
-  private Image loadSprite(String path) {
-    BufferedImage img = null;
-    try {
-      img = ImageIO.read(getClass().getResourceAsStream(path));
-    } catch (IOException io) {
-      throw new RuntimeException("Failed to load sprite image " + path, io);
-    }
-    return img;
-  }
 
   @Override
   public String toString() {
