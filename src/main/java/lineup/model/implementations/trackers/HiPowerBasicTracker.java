@@ -6,9 +6,12 @@ public class HiPowerBasicTracker extends NearestSingleTargetTracker {
     super(100);
   }
 
-  @Override
   public String getName() {
     return "Microwave Radar";
+  }
+
+  public int getCost() {
+    return 80;
   }
 
 }

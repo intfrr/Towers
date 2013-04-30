@@ -198,15 +198,16 @@ public class World {
   }
 
   public Bunker getBunkerAtLocation(Point point) {
+    Bunker selectedBunker = null;
     for (Bunker bunker : bunkers) {
       if (bunker.getBoundingRect().contains(point)) {
         bunker.setSelected(true);
-        return bunker;
+        selectedBunker = bunker;
       } else {
         bunker.setSelected(false);
       }
     }
-    return null;
+    return selectedBunker;
   }
   
   public boolean isOnWaveCooldown() {

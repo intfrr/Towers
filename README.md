@@ -18,10 +18,14 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
 
  - Ability to build bunkers
 
+##### 30 April 2013
+
+ - Double buffered display
+ - Added tech tree and ability to upgrade the weapons and tracking system in a bunker
+
 ### TODO
 
- - Double buffer display
- - More focus on bunkers, ability to change tracking and weapons
+ - Flesh out tech tree with a few more trackers and weapons
  - Better UI - more stuff in the panels
  - Ammo storage module
   - weapons consume ammo from storage

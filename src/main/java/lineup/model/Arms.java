@@ -8,5 +8,6 @@ public interface Arms {
   public boolean isReady();
   public void cooldown(int elapsed);
   public String getName();
+  public int getCost();
   
 }

@@ -34,4 +34,8 @@ public class CruiseLauncher extends SingleShotGun {
     return "Cruise Launcher";
   }
 
+  public int getCost() {
+    return 80;
+  }
+
 }

@@ -1,8 +1,5 @@
 package lineup.game;
 
-import lineup.model.Bunker;
-import lineup.model.implementations.bunkers.LauncherBunker;
-import lineup.model.implementations.bunkers.SmallBunker;
 import lineup.ui.UI;
 import lineup.util.LevelFactory;
 import lineup.world.World;
@@ -22,13 +19,6 @@ public class ConfigGame {
     
     LevelFactory factory = LevelFactory.getInstance();
     World.getInstance().setLevel(factory.getLevel(0));
-    
-    Bunker bunker1 = new SmallBunker();
-    bunker1.setLocation(60, 60);
-    Bunker bunker2 = new LauncherBunker();
-    bunker2.setLocation(170, 170);
-    World.getInstance().getBunkers().add(bunker1);
-    World.getInstance().getBunkers().add(bunker2);
     
     ui.launch();
   }

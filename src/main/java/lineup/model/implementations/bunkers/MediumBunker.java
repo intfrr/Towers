@@ -4,8 +4,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import lineup.model.Bunker;
-import lineup.model.implementations.arms.Cannon;
-import lineup.model.implementations.trackers.BasicTracker;
 
 /**
  * Medium bunker with 15 size.
@@ -22,8 +20,6 @@ public class MediumBunker extends Bunker {
    */
   public MediumBunker() {
     super(15, 100);
-    setArms(new Cannon(this));
-    setTracking(new BasicTracker());
     sprite = loadSprite(BunkerType.M);
   }
 

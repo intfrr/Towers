@@ -55,7 +55,7 @@ public class UI {
     frame.add(view);
     frame.add(controls);
     
-    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setResizable(false);
   }
   

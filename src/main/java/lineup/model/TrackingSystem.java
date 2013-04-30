@@ -7,4 +7,5 @@ public interface TrackingSystem {
   public List<Target> getTargets(Location location, List<Creep> creeps);
   public String getName();
   public int getRange();
+  public int getCost();
 }

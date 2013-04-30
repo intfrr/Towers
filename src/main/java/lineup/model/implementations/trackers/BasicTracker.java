@@ -6,4 +6,12 @@ public class BasicTracker extends NearestSingleTargetTracker {
     super(40);
   }
 
+  public String getName() {
+    return "Basic tracker";
+  }
+
+  public int getCost() {
+    return 30;
+  }
+
 }

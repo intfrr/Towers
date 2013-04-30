@@ -34,4 +34,8 @@ public class Cannon extends SingleShotGun {
     return "Cannon";
   }
 
+  public int getCost() {
+    return 30;
+  }
+
 }

@@ -14,7 +14,7 @@ import lineup.model.TrackingSystem;
  * the nearest one in range.
  * @author Neil
  */
-public class NearestSingleTargetTracker implements TrackingSystem {
+public abstract class NearestSingleTargetTracker implements TrackingSystem {
 
   private final int range;
   
@@ -56,10 +56,6 @@ public class NearestSingleTargetTracker implements TrackingSystem {
     }
     
     return nearest;
-  }
-
-  public String getName() {
-    return "Binoculars";
   }
 
   public int getRange() {

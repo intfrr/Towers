@@ -55,4 +55,8 @@ public abstract class SingleShotGun implements Arms {
     return owner;
   }
   
+  public void setOwner(Bunker bunker) {
+    this.owner = bunker;
+  }
+  
 }

@@ -4,8 +4,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import lineup.model.Bunker;
-import lineup.model.implementations.arms.Cannon;
-import lineup.model.implementations.trackers.BasicTracker;
 
 /**
  * Large bunker with 20 size.
@@ -22,8 +20,6 @@ public class LargeBunker extends Bunker {
    */
   public LargeBunker() {
     super(20, 200);
-    setArms(new Cannon(this));
-    setTracking(new BasicTracker());
     sprite = loadSprite(BunkerType.L);
   }
 
