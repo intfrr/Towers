@@ -10,7 +10,8 @@ import lineup.model.TrackingSystem;
 import lineup.model.implementations.arms.Cannon;
 import lineup.model.implementations.arms.CruiseLauncher;
 import lineup.model.implementations.trackers.BasicTracker;
-import lineup.model.implementations.trackers.HiPowerBasicTracker;
+import lineup.model.implementations.trackers.HighPowerBasicTracker;
+import lineup.model.implementations.trackers.MediumPowerBasicTracker;
 
 /**
  * Class that manages the tech tree for various things.
@@ -32,14 +33,18 @@ public class TechTree {
 
   private void buildTrackingTechTree() {
     TrackingSystem basic = new BasicTracker();
-    TrackingSystem hiPower = new HiPowerBasicTracker();
+    TrackingSystem medPower = new MediumPowerBasicTracker();
+    TrackingSystem hiPower = new HighPowerBasicTracker();
     
     Node<TrackingSystem> basicNode = new Node<TrackingSystem>(basic);
+    Node<TrackingSystem> medPowerNode = new Node<TrackingSystem>(medPower);
     Node<TrackingSystem> hiPowerNode = new Node<TrackingSystem>(hiPower);
     
-    basicNode.addUpgrade(hiPowerNode);
+    basicNode.addUpgrade(medPowerNode);
+    medPowerNode.addUpgrade(hiPowerNode);
     
     trackerMap.put(basic.getClass(), basicNode);
+    trackerMap.put(medPower.getClass(), medPowerNode);
     trackerMap.put(hiPower.getClass(), hiPowerNode);
   }
 

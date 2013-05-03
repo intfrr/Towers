@@ -7,7 +7,6 @@ import lineup.model.Bunker;
 
 /**
  * Medium bunker with 15 size.
- * Contains a Cannon and BasicTracker.
  * @author Neil
  *
  */
@@ -27,9 +26,12 @@ public class MediumBunker extends Bunker {
     g.drawImage(sprite, (int)getLocation().x, (int)getLocation().y, null);
   }
 
-  @Override
   public String getName() {
     return "Medium Bunker";
+  }
+
+  public String getDescription() {
+    return "A medium sized bunker";
   }
 
 }

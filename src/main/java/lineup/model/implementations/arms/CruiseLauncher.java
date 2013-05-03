@@ -38,4 +38,8 @@ public class CruiseLauncher extends SingleShotGun {
     return 80;
   }
 
+  public String getDescription() {
+    return "Missile launcher with a slow rate of fire. Fires powerful seeking cruise missiles";
+  }
+
 }

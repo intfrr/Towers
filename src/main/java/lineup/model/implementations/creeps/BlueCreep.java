@@ -21,7 +21,8 @@ public class BlueCreep extends Creep {
   private int size = 6;
   private Color color = Color.BLUE;
   
-  public void render(Graphics g) {
+  @Override
+  public void renderCreep(Graphics g) {
     g.setColor(color);
     g.fillOval((int)getLocation().x, (int)getLocation().y, size, size);
   }

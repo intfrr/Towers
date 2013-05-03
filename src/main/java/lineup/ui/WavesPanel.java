@@ -64,7 +64,7 @@ public class WavesPanel extends JPanel {
     button.setBorder(border);
     button.setActionCommand(type.name());
     button.addActionListener(new CreateBunkerListener(gameUi));
-    World.getInstance().getMoneyProp().addPropertyChangeListener(button);
+    World.getInstance().getPlayer().addMoneyListener(button);
     add(button);
     return button;
   }

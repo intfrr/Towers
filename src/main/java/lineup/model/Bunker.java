@@ -19,7 +19,7 @@ import lineup.world.World;
  * @author Neil
  *
  */
-public abstract class Bunker extends Storage implements Renderable, Updateable {
+public abstract class Bunker extends Storage implements Renderable, Updateable, Purchasable {
   
   public enum BunkerType {S, M, L}
   
@@ -94,8 +94,6 @@ public abstract class Bunker extends Storage implements Renderable, Updateable {
   public Rectangle getBoundingRect() {
     return new Rectangle((int)location.x, (int)location.y, getSize(), getSize());
   }
-  
-  public abstract String getName();
 
   public void setSelected(boolean selected) {
     this.selected = selected;

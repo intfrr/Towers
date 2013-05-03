@@ -42,8 +42,8 @@ public class ViewMouseListener implements MouseListener {
     BunkerType type = (BunkerType)modeObject;
     Bunker bunker = Bunker.create(type, point.x, point.y);
     
-    World.getInstance().getBunkers().add(bunker);
-    World.getInstance().removeMoney(bunker.getCost());
+    World.getInstance().addBunker(bunker);
+    World.getInstance().getPlayer().removeMoney(bunker.getCost());
   }
 
   public void mousePressed(MouseEvent e) {

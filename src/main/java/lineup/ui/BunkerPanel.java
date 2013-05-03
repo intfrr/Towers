@@ -18,6 +18,8 @@ import lineup.model.Arms;
 import lineup.model.Bunker;
 import lineup.model.TrackingSystem;
 import lineup.tech.TechTree;
+import lineup.ui.util.GraphicsUtil;
+import lineup.world.Player;
 import lineup.world.World;
 
 public class BunkerPanel extends JPanel implements ActionListener {
@@ -26,6 +28,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
 
   private Font font = new Font("SansSerif", Font.PLAIN, 9);
   private Bunker bunker;
+  private Player player = World.getInstance().getPlayer();
   private TechTree techTree = new TechTree();
   
   private JButton upgradeArms = new JButton("upgrade");
@@ -37,7 +40,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
    */
   public BunkerPanel(int width) {
     super();
-    setSize(width/2-10, 90);
+    setSize(width/2+20, 90);
     setPreferredSize(getSize());
     setBackground(Color.DARK_GRAY);
     setBorder(BorderFactory.createLoweredBevelBorder());
@@ -56,7 +59,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
     upgradeArms.setVisible(false);
     
     add(upgradeArms);
-    layout.putConstraint(SpringLayout.NORTH, upgradeArms, 42, SpringLayout.NORTH, this);
+    layout.putConstraint(SpringLayout.NORTH, upgradeArms, 48, SpringLayout.NORTH, this);
     layout.putConstraint(SpringLayout.EAST, upgradeArms, -5, SpringLayout.EAST, this);
     
     upgradeTracker.setToolTipText("Upgrade tracker");
@@ -107,6 +110,8 @@ public class BunkerPanel extends JPanel implements ActionListener {
     } else {
       g.setColor(Color.YELLOW);
       g.drawString(bunker.getTracking().getName(), 5, 20);
+      g.setColor(Color.GRAY);
+      GraphicsUtil.drawWrappedString(g, bunker.getTracking().getDescription(), 6, 30, getWidth() - 50);
     }
     
     if (bunker.getArms() == null) {
@@ -114,7 +119,9 @@ public class BunkerPanel extends JPanel implements ActionListener {
       g.drawString("No weapon system", 5, 50);
     } else {
       g.setColor(Color.YELLOW);
-      g.drawString(bunker.getArms().getName(), 5, 50);
+      g.drawString(bunker.getArms().getName(), 5, 55);
+      g.setColor(Color.GRAY);
+      GraphicsUtil.drawWrappedString(g, bunker.getArms().getDescription(), 6, 65, getWidth() - 50);
     }
   }
 
@@ -136,9 +143,10 @@ public class BunkerPanel extends JPanel implements ActionListener {
     
     for (Arms arms : techTree.getUpgrades(bunker.getArms())) {
       JMenuItem item = new JMenuItem(arms.getName() + " $" + arms.getCost());
+      item.setToolTipText(arms.getDescription());
       item.setActionCommand(arms.getClass().getCanonicalName());
       item.addActionListener(this);
-      if (World.getInstance().getMoney() < arms.getCost()) {
+      if (player.getMoney() < arms.getCost()) {
         item.setEnabled(false);
       }
       popup.add(item);
@@ -154,9 +162,10 @@ public class BunkerPanel extends JPanel implements ActionListener {
     
     for (TrackingSystem tracker : techTree.getUpgrades(bunker.getTracking())) {
       JMenuItem item = new JMenuItem(tracker.getName() + " $" + tracker.getCost());
+      item.setToolTipText(tracker.getDescription());
       item.setActionCommand(tracker.getClass().getCanonicalName());
       item.addActionListener(this);
-      if (World.getInstance().getMoney() < tracker.getCost()) {
+      if (player.getMoney() < tracker.getCost()) {
         item.setEnabled(false);
       }
       popup.add(item);
@@ -184,7 +193,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
   private void upgradeTracker(Class<? extends TrackingSystem> c) {
     try {
       TrackingSystem tracker = c.newInstance();
-      World.getInstance().removeMoney(tracker.getCost());
+      player.removeMoney(tracker.getCost());
       bunker.setTracking(tracker);
       upgradeTracker.setEnabled(!techTree.getUpgrades(bunker.getTracking()).isEmpty());
     } catch (Exception ex) {
@@ -196,7 +205,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
   private void upgradeArms(Class<? extends Arms> c) {
     try {
       Arms arms = (Arms) c.getConstructors()[0].newInstance(bunker);
-      World.getInstance().removeMoney(arms.getCost());
+      player.removeMoney(arms.getCost());
       bunker.setArms(arms);
       upgradeArms.setEnabled(!techTree.getUpgrades(bunker.getArms()).isEmpty());
     } catch (Exception ex) {

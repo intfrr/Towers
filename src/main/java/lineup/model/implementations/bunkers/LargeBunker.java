@@ -7,7 +7,6 @@ import lineup.model.Bunker;
 
 /**
  * Large bunker with 20 size.
- * Contains a Cannon and BasicTracker.
  * @author Neil
  *
  */
@@ -27,9 +26,12 @@ public class LargeBunker extends Bunker {
     g.drawImage(sprite, (int)getLocation().x, (int)getLocation().y, null);
   }
 
-  @Override
   public String getName() {
     return "Large Bunker";
+  }
+
+  public String getDescription() {
+    return "A large bunker";
   }
 
 }

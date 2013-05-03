@@ -38,4 +38,8 @@ public class Cannon extends SingleShotGun {
     return 30;
   }
 
+  public String getDescription() {
+    return "Basic cannon that fires shells in a straight line";
+  }
+
 }

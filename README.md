@@ -25,6 +25,12 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
  - Double buffered display
  - Added tech tree and ability to upgrade the weapons and tracking system in a bunker
 
+##### 3 May 2013
+
+ - Health bars for creeps
+ - New medium range radar tracker
+ - Descriptions for arms and trackers
+ 
 ### TODO
 
  - Flesh out tech tree with a few more trackers and weapons

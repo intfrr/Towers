@@ -1,5 +1,7 @@
 package lineup.model;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -11,6 +13,7 @@ import lineup.world.Updateable;
 public abstract class Creep implements Renderable, Updateable {
 
   private Location location;
+  private int maxHealth;
   private int health;
   private double velocity;
   private Deque<Location> route;
@@ -20,6 +23,7 @@ public abstract class Creep implements Renderable, Updateable {
     this.name = name;
     this.velocity = velocity;
     this.health = health;
+    this.maxHealth = health;
     this.route = new LinkedList<Location>(route);
     this.location = route.get(0);
   }
@@ -48,6 +52,20 @@ public abstract class Creep implements Renderable, Updateable {
     }
   }
   
+  
+  public void render(Graphics g) {
+    if (health < maxHealth) {
+      int barsize = health * getSize() / maxHealth;
+      g.setColor(Color.GREEN);
+      g.fillRect((int)location.x, (int)location.y - 2, barsize, 1);
+      g.setColor(Color.RED);
+      g.fillRect((int)location.x+barsize, (int)location.y - 2, getSize() - barsize, 1);
+    }
+    renderCreep(g);
+  }
+  
+  protected abstract void renderCreep(Graphics g);
+
   public Location getLocation() {
     return location;
   }

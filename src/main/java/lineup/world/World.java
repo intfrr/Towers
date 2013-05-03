@@ -2,7 +2,6 @@ package lineup.world;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -32,14 +31,16 @@ public class World {
   private int waveCooldown = 2000;
   private boolean onCooldown = true;
   
-  //Player attributes
-  private int lives = 10;
-  private Integer money = 500;
-  private PropertyChangeSupport moneyProp = new PropertyChangeSupport(money);
+  private Player player = new Player(10, 500);
   
   private final int width;
   private final int height;
   
+  /**
+   * Private constructor.
+   * @param width
+   * @param height
+   */
   private World(int width, int height) {
     this.width = width;
     this.height = height;
@@ -86,8 +87,10 @@ public class World {
   }
 
   public void update(int elapsed) {
-    for (Bunker b : bunkers) {
-      b.update(elapsed);
+    synchronized (bunkers) {
+      for (Bunker b : bunkers) {
+        b.update(elapsed);
+      }
     }
     
     for (Projectile p : projectiles) {
@@ -159,7 +162,7 @@ public class World {
           prit.remove();
           creep.setHealth(creep.getHealth() - projectile.getDamage());
           if (creep.getHealth() <= 0) {
-            money += creep.getValue();
+            player.giveMoney(creep.getValue());
             projectile.getOwner().incrementKills();
             crip.remove();
           }
@@ -175,7 +178,7 @@ public class World {
       Creep creep = crip.next();
       Rectangle baseRect = new Rectangle((int)level.getBase().x, (int)level.getBase().y, 10, 10);
       if (baseRect.intersects(creep.getBoundingRect())) {
-        lives--;
+        player.removeLife(1);
         crip.remove();
       }
     }
@@ -185,16 +188,12 @@ public class World {
     return l.x < 0 || l.x > width || l.y < 0 || l.y > height;
   }
 
-  public int getLives() {
-    return lives;
-  }
-
   public boolean hasWon() {
     return level.getWaves().isEmpty() && creeps.isEmpty();
   }
 
   public boolean hasLost() {
-    return lives == 0;
+    return player.getLives() == 0;
   }
 
   public Bunker getBunkerAtLocation(Point point) {
@@ -222,24 +221,14 @@ public class World {
     return level.getWaves().getFirst(); 
   }
 
-  public void setMoney(int money) {
-    moneyProp.firePropertyChange("money", this.money.intValue(), money);
-    this.money = money;
+  public Player getPlayer() {
+    return player;
   }
 
-  public int getMoney() {
-    return money;
-  }
-
-  public void removeMoney(int cost) {
-    if (money < cost) {
-      throw new RuntimeException("Can't afford");
+  public void addBunker(Bunker bunker) {
+    synchronized (bunkers) {
+      bunkers.add(bunker);
     }
-    moneyProp.firePropertyChange("money", this.money.intValue(), money - cost);
-    money = money - cost;
   }
-  
-  public PropertyChangeSupport getMoneyProp() {
-    return moneyProp;
-  }
+
 }
