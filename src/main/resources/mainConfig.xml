@@ -31,12 +31,12 @@
 			<tns:waves>
 				<tns:wave sequence="1">
 					<tns:creepRef>blue</tns:creepRef>
-					<tns:interval>5</tns:interval>
-					<tns:count>3</tns:count>
+					<tns:interval>12</tns:interval>
+					<tns:count>1</tns:count>
 				</tns:wave>
 				<tns:wave sequence="2">
 					<tns:creepRef>red</tns:creepRef>
-					<tns:interval>2</tns:interval>
+					<tns:interval>12</tns:interval>
 					<tns:count>8</tns:count>
 				</tns:wave>
 			</tns:waves>

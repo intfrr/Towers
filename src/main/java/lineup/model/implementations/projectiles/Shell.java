@@ -5,7 +5,9 @@ import java.awt.Graphics;
 
 
 import lineup.model.Bunker;
+import lineup.model.Location;
 import lineup.model.Projectile;
+import lineup.util.math.Vector2D;
 
 public class Shell extends Projectile {
 
@@ -13,29 +15,25 @@ public class Shell extends Projectile {
   private Color color = Color.RED;
   
   public Shell(Bunker owner, int x, int y, double bearing) {
-    super(owner, x, y, velocity/1000.0, bearing, 2);
+    super(owner, new Vector2D(new Location(x, y), velocity, bearing), 2);
   }
 
   public void render(Graphics g) {
     g.setColor(color);
-    g.fillOval((int)getX(), (int)getY(), getSize(), getSize());
+    g.fillOval((int)getVector().getX(), (int)getVector().getY(), getSize(), getSize());
   }
 
   /**
    * Flies in a straight line.
    */
   public void update(int elapsed) {
-    double time = elapsed;
-    double dx = Math.cos(getBearing()) * getVelocity() * time;
-    double dy = Math.sin(getBearing()) * getVelocity() * time;
-    
-    setX(getX() + dx);
-    setY(getY() + dy);
+    double time = (double)elapsed / 1000.0;
+    getVector().translateTime(time);
   }
   
   @Override
   public String toString() {
-    return getX() + "," + getY() + " b" + getBearing();
+    return "Shell: " + getVector();
   }
 
   @Override

@@ -28,7 +28,7 @@ public class World {
   private List<Creep> creeps = new ArrayList<Creep>();
   
   private Level level;
-  private int waveCooldown = 2000;
+  private int waveCooldown = 7000;
   private boolean onCooldown = true;
   
   private Player player = new Player(10, 500);
@@ -142,7 +142,7 @@ public class World {
     ListIterator<Projectile> prit = projectiles.listIterator();
     while (prit.hasNext()) {
       Projectile p = prit.next();
-      Location l = new Location(p.getX(), p.getY());
+      Location l = new Location(p.getVector().getX(), p.getVector().getY());
       if (isOffScreen(l)) {
         prit.remove();
       }

@@ -7,48 +7,51 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
+import lineup.util.math.Vector2D;
 import lineup.world.Renderable;
 import lineup.world.Updateable;
 
 public abstract class Creep implements Renderable, Updateable {
 
-  private Location location;
+  private Vector2D vector;
   private int maxHealth;
   private int health;
-  private double velocity;
   private Deque<Location> route;
   private String name;
   
   public Creep(String name, double velocity, int health, List<Location> route) {
     this.name = name;
-    this.velocity = velocity;
     this.health = health;
     this.maxHealth = health;
     this.route = new LinkedList<Location>(route);
-    this.location = route.get(0);
+    
+    Location position = route.get(0);
+    Location target = route.get(1);
+    this.vector = new Vector2D(position, target, velocity);
   }
   
   public void update(int elapsed) {
+    double time = (double)elapsed/1000.0;
+    
     Location destination = route.getFirst();
     
-    if (destination.equals(location)) {
-      //System.out.println("Arrived " + location);
+    if (destination.equals(vector.getLocation())) {
       route.removeFirst();
+      vector.pointAt(route.getFirst());
     } else {
     
       //Set new location
-      double distanceX = destination.x - location.x;
-      double distanceY = destination.y - location.y;
-      double bearing = Math.atan2(distanceY, distanceX);
+      double distanceX = destination.x - vector.getX();
+      double distanceY = destination.y - vector.getY();
       
-      double dx = velocity * Math.cos(bearing);
-      double dy = velocity * Math.sin(bearing);
+      double dx = vector.getDx() * time;
+      double dy = vector.getDy() * time;
       
       //Don't go past target
       dx = dx > 0 ? Math.min(distanceX, dx) : Math.max(distanceX, dx);
       dy = dy > 0 ? Math.min(distanceY, dy) : Math.max(distanceY, dy);
       
-      location = new Location(location.x + dx, location.y = location.y + dy);
+      vector.translate(dx, dy);
     }
   }
   
@@ -57,9 +60,9 @@ public abstract class Creep implements Renderable, Updateable {
     if (health < maxHealth) {
       int barsize = health * getSize() / maxHealth;
       g.setColor(Color.GREEN);
-      g.fillRect((int)location.x, (int)location.y - 2, barsize, 1);
+      g.fillRect((int)vector.getX(), (int)vector.getY() - 2, barsize, 1);
       g.setColor(Color.RED);
-      g.fillRect((int)location.x+barsize, (int)location.y - 2, getSize() - barsize, 1);
+      g.fillRect((int)vector.getX()+barsize, (int)vector.getY() - 2, getSize() - barsize, 1);
     }
     renderCreep(g);
   }
@@ -67,11 +70,11 @@ public abstract class Creep implements Renderable, Updateable {
   protected abstract void renderCreep(Graphics g);
 
   public Location getLocation() {
-    return location;
+    return vector.getLocation();
   }
   
   public Location getCentreLocation() {
-    return new Location(location.x + getSize()/2, location.y + getSize()/2);
+    return new Location(vector.getX() + getSize()/2, vector.getY() + getSize()/2);
   }
 
   public int getHealth() {
@@ -80,14 +83,6 @@ public abstract class Creep implements Renderable, Updateable {
   
   public void setHealth(int health) {
     this.health = health;
-  }
-
-  public double getVelocity() {
-    return velocity;
-  }
-
-  public void setVelocity(double velocity) {
-    this.velocity = velocity;
   }
 
   public String getName() {
@@ -99,7 +94,11 @@ public abstract class Creep implements Renderable, Updateable {
   }
   
   public Rectangle getBoundingRect() {
-    return new Rectangle((int)location.x, (int)location.y, getSize(), getSize());
+    return new Rectangle((int)vector.getX(), (int)vector.getY(), getSize(), getSize());
+  }
+  
+  public Vector2D getVector() {
+    return vector;
   }
 
   public abstract Creep copy();

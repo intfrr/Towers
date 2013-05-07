@@ -9,6 +9,7 @@ import lineup.model.Arms;
 import lineup.model.TrackingSystem;
 import lineup.model.implementations.arms.Cannon;
 import lineup.model.implementations.arms.CruiseLauncher;
+import lineup.model.implementations.arms.LightMG;
 import lineup.model.implementations.trackers.BasicTracker;
 import lineup.model.implementations.trackers.HighPowerBasicTracker;
 import lineup.model.implementations.trackers.MediumPowerBasicTracker;
@@ -51,14 +52,15 @@ public class TechTree {
   
   private void buildArmsTechTree() {
     Arms cannon = new Cannon(null);
+    Arms lmg = new LightMG(null);
     Arms launcher = new CruiseLauncher(null);
     
     Node<Arms> cannonNode = new Node<Arms>(cannon);
+    Node<Arms> lmgNode = new Node<Arms>(cannon);
     Node<Arms> launcherNode = new Node<Arms>(launcher);
     
-    cannonNode.addUpgrade(launcherNode);
-    
     armsMap.put(cannon.getClass(), cannonNode);
+    armsMap.put(lmg.getClass(), lmgNode);
     armsMap.put(launcher.getClass(), launcherNode);
   }
   
@@ -67,6 +69,8 @@ public class TechTree {
     if (arms == null) {
       Set<Arms> first = new HashSet<Arms>();
       first.add(new Cannon(null));
+      first.add(new LightMG(null));
+      first.add(new CruiseLauncher(null));
       return first;
     } else {
       return armsMap.get(arms.getClass()).getUpgrades();

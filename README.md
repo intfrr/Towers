@@ -31,6 +31,11 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
  - New medium range radar tracker
  - Descriptions for arms and trackers
  
+##### 7 May 2013
+
+ - Added Vector2D class to handle position and movement of things
+ - Create Light MG arms which fires in bursts and leads targets
+
 ### TODO
 
  - Flesh out tech tree with a few more trackers and weapons

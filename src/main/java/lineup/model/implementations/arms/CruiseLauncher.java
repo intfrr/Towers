@@ -6,6 +6,7 @@ import lineup.model.Projectile;
 import lineup.model.Target;
 import lineup.model.implementations.projectiles.CruiseMissile;
 import lineup.model.implementations.arms.SingleShotGun;
+import lineup.util.math.Vector2D;
 
 /**
  * Missile launcher with 8 sec reload that fires cruise
@@ -23,11 +24,8 @@ public class CruiseLauncher extends SingleShotGun {
 
   @Override
   public Projectile createProjectile(Location location, Target target) {
-    double dx = target.getCreep().getCentreLocation().x - location.x;
-    double dy = target.getCreep().getCentreLocation().y - location.y;
-    double bearing = Math.atan2(dy, dx);
-    
-    return new CruiseMissile(getOwner(), (int)location.x, (int)location.y, bearing, target.getCreep());
+    Vector2D v = new Vector2D(location, target.getCreep().getCentreLocation());
+    return new CruiseMissile(getOwner(), (int)location.x, (int)location.y, v.getBearing(), target.getCreep());
   }
 
   public String getName() {
