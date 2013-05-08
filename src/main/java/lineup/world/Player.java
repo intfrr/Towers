@@ -7,7 +7,7 @@ import lineup.ui.BunkerButton;
 public class Player {
 
   private int lives = 10;
-  private Integer money = 500;
+  private Integer money = new Integer(0);
   private PropertyChangeSupport moneyProp = new PropertyChangeSupport(money);
   
   /**
@@ -37,7 +37,7 @@ public class Player {
   }
 
   public void removeLife(int i) {
-    lives--;
+    lives -= i;
   }
 
   public int getLives() {

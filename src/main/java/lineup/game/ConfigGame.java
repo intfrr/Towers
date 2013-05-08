@@ -10,7 +10,11 @@ public class ConfigGame {
   
   public static void main(String[] args) {
     ConfigGame game = new ConfigGame(300, 200);
-    game.start();
+    try {
+      game.start();
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
   }
 
   public ConfigGame(int width, int height) {

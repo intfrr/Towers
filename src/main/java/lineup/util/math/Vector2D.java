@@ -155,4 +155,8 @@ public class Vector2D {
   public Vector2D copy() {
     return new Vector2D(x, y, magnitude, bearing);
   }
+
+  public void turn(double delta) {
+    bearing += delta;
+  }
 }

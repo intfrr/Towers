@@ -6,23 +6,20 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 
 import lineup.model.Bunker;
-import lineup.model.Creep;
 import lineup.model.Location;
 import lineup.model.Projectile;
 import lineup.ui.util.ImageLoader;
 import lineup.util.math.Vector2D;
 
-public class CruiseMissile extends Projectile {
+public class LightRocket extends Projectile {
 
-  private static double velocity = 30.0;
-  private Creep target;
+  private static double velocity = 60.0;
   private Image sprite;
   private AffineTransform identity = new AffineTransform();
   
-  public CruiseMissile(Bunker owner, int x, int y, double bearing, Creep target) {
-    super(owner, new Vector2D(new Location(x, y), velocity, bearing), 5);
-    this.target = target;
-    sprite = ImageLoader.loadSprite("cruisemissile.png");
+  public LightRocket(Bunker owner, int x, int y, double bearing) {
+    super(owner, new Vector2D(new Location(x, y), velocity, bearing), 3);
+    sprite = ImageLoader.loadSprite("lightrocket.png");
   }
 
   public void render(Graphics g) {
@@ -35,13 +32,8 @@ public class CruiseMissile extends Projectile {
     g2.drawImage(sprite, xform, null);
   }
 
-  /**
-   * Tracks the locked on creep target.
-   */
+
   public void update(int elapsed) {
-    if (target.getHealth() > 0) {
-      getVector().pointAt(target.getCentreLocation());
-    }
     double time = (double)elapsed / 1000.0;
     getVector().translateTime(time);
   }
@@ -51,12 +43,12 @@ public class CruiseMissile extends Projectile {
 
   @Override
   public String toString() {
-    return "CruiseMissile " + getVector() + " locked on " + target;
+    return "LightRocket" + getVector();
   }
 
   @Override
   public int getDamage() {
-    return 20;
+    return 5;
   }
 
 }

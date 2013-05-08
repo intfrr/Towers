@@ -9,12 +9,12 @@ import lineup.model.Location;
 import lineup.model.Projectile;
 import lineup.util.math.Vector2D;
 
-public class Shell extends Projectile {
+public class SmallShell extends Projectile {
 
-  private static double velocity = 50.0; 
+  private static double velocity = 80.0; 
   private Color color = Color.RED;
   
-  public Shell(Bunker owner, int x, int y, double bearing) {
+  public SmallShell(Bunker owner, int x, int y, double bearing) {
     super(owner, new Vector2D(new Location(x, y), velocity, bearing), 2);
   }
 
@@ -33,7 +33,7 @@ public class Shell extends Projectile {
   
   @Override
   public String toString() {
-    return "Shell: " + getVector();
+    return "SmallShell: " + getVector();
   }
 
   @Override

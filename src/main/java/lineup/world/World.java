@@ -31,7 +31,7 @@ public class World {
   private int waveCooldown = 7000;
   private boolean onCooldown = true;
   
-  private Player player = new Player(10, 500);
+  private Player player = new Player(10, 5000);
   
   private final int width;
   private final int height;
@@ -179,6 +179,7 @@ public class World {
       Rectangle baseRect = new Rectangle((int)level.getBase().x, (int)level.getBase().y, 10, 10);
       if (baseRect.intersects(creep.getBoundingRect())) {
         player.removeLife(1);
+        creep.setHealth(0);
         crip.remove();
       }
     }

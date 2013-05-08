@@ -36,6 +36,10 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
  - Added Vector2D class to handle position and movement of things
  - Create Light MG arms which fires in bursts and leads targets
 
+##### 8 May 2013
+
+ - Further fleshed out out tech tree
+
 ### TODO
 
  - Flesh out tech tree with a few more trackers and weapons
@@ -46,3 +50,4 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
  - Multiple levels
  - Better art
  - Sounds
+ - Help screen
