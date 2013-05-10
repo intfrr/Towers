@@ -15,7 +15,7 @@ public class RedCreep extends Creep {
    * @param route
    */
   public RedCreep(List<Location> route) {
-    super("Red Creep", 30, 20, route);
+    super("Red Creep", 30, 12, route);
   }
 
   private int size = 8;

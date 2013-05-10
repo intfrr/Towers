@@ -104,7 +104,7 @@ public class LevelFactory {
     });
     
     for (WaveConfig config : waveList) {
-      int interval = config.getInterval();
+      double interval = config.getInterval();
       int count = config.getCount();
       Creep creep = createCreep(config.getCreepRef(), route);
       waves.add(new Wave(interval, count, creep));

@@ -40,6 +40,11 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
 
  - Further fleshed out out tech tree
 
+##### 10 May 2013
+
+ - Added more creeps and waves
+ - Added new nearest to base tracker
+
 ### TODO
 
  - Flesh out tech tree with a few more trackers and weapons

@@ -107,4 +107,8 @@ public abstract class Creep implements Renderable, Updateable {
   
   public abstract int getValue();
 
+  public double getDistanceToNextRoutePoint() {
+    return vector.getLocation().asPoint().distance(route.peek().asPoint());
+  }
+
 }

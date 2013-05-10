@@ -21,6 +21,7 @@ import lineup.model.implementations.arms.light.LightMG;
 import lineup.model.implementations.trackers.BasicTracker;
 import lineup.model.implementations.trackers.HighPowerBasicTracker;
 import lineup.model.implementations.trackers.MediumPowerBasicTracker;
+import lineup.model.implementations.trackers.NearestPriorityScanner;
 
 /**
  * Class that manages the tech tree for various things.
@@ -45,16 +46,22 @@ public class TechTree {
     TrackingSystem medPower = new MediumPowerBasicTracker();
     TrackingSystem hiPower = new HighPowerBasicTracker();
     
+    TrackingSystem nearest = new NearestPriorityScanner();
+    
     Node<TrackingSystem> basicNode = new Node<TrackingSystem>(basic);
     Node<TrackingSystem> medPowerNode = new Node<TrackingSystem>(medPower);
     Node<TrackingSystem> hiPowerNode = new Node<TrackingSystem>(hiPower);
     
+    Node<TrackingSystem> nNode = new Node<TrackingSystem>(nearest);
+    
     basicNode.addUpgrade(medPowerNode);
+    basicNode.addUpgrade(nNode);
     medPowerNode.addUpgrade(hiPowerNode);
     
     trackerMap.put(basic.getClass(), basicNode);
     trackerMap.put(medPower.getClass(), medPowerNode);
     trackerMap.put(hiPower.getClass(), hiPowerNode);
+    trackerMap.put(nearest.getClass(), nNode);
   }
 
   

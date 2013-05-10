@@ -31,13 +31,23 @@
 			<tns:waves>
 				<tns:wave sequence="1">
 					<tns:creepRef>blue</tns:creepRef>
-					<tns:interval>12</tns:interval>
-					<tns:count>1</tns:count>
+					<tns:interval>3</tns:interval>
+					<tns:count>10</tns:count>
 				</tns:wave>
 				<tns:wave sequence="2">
 					<tns:creepRef>red</tns:creepRef>
-					<tns:interval>12</tns:interval>
-					<tns:count>8</tns:count>
+					<tns:interval>4</tns:interval>
+					<tns:count>12</tns:count>
+				</tns:wave>
+				<tns:wave sequence="3">
+					<tns:creepRef>yellow</tns:creepRef>
+					<tns:interval>0.3</tns:interval>
+					<tns:count>30</tns:count>
+				</tns:wave>
+				<tns:wave sequence="4">
+					<tns:creepRef>bg</tns:creepRef>
+					<tns:interval>10</tns:interval>
+					<tns:count>3</tns:count>
 				</tns:wave>
 			</tns:waves>
 		</tns:level>
@@ -49,6 +59,12 @@
 		</tns:creep>
 		<tns:creep ref="red">
 			<tns:fqName>lineup.model.implementations.creeps.RedCreep</tns:fqName>
+		</tns:creep>
+		<tns:creep ref="yellow">
+			<tns:fqName>lineup.model.implementations.creeps.YellowCreep</tns:fqName>
+		</tns:creep>
+		<tns:creep ref="bg">
+			<tns:fqName>lineup.model.implementations.creeps.BossGreen</tns:fqName>
 		</tns:creep>
 	</tns:creeps>
 	

@@ -65,7 +65,7 @@
     <complexType name="WaveConfig">
     	<sequence>
     		<element name="creepRef" type="string"></element>
-    		<element name="interval" type="int"></element>
+    		<element name="interval" type="double"></element>
     		<element name="count" type="int"></element>
     	</sequence>
     	<attribute name="sequence" type="int"></attribute>

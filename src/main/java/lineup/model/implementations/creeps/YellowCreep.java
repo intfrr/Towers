@@ -8,18 +8,18 @@ import java.util.List;
 import lineup.model.Creep;
 import lineup.model.Location;
 
-public class BlueCreep extends Creep {
+public class YellowCreep extends Creep {
 
   /**
    * Constructor.
    * @param route
    */
-  public BlueCreep(List<Location> route) {
-    super("Blue Creep", 20, 6, route);
+  public YellowCreep(List<Location> route) {
+    super("Yellow Creep", 20, 3, route);
   }
 
-  private int size = 6;
-  private Color color = Color.BLUE;
+  private int size = 4;
+  private Color color = Color.YELLOW;
   
   @Override
   public void renderCreep(Graphics g) {
@@ -34,7 +34,7 @@ public class BlueCreep extends Creep {
   
   @Override
   public Creep copy() {
-    BlueCreep copy = new BlueCreep(new LinkedList<Location>(getRoute()));
+    YellowCreep copy = new YellowCreep(new LinkedList<Location>(getRoute()));
     //System.out.println("Spawning " + copy + " with route " + copy.getRoute());
 
     return copy;
@@ -47,7 +47,7 @@ public class BlueCreep extends Creep {
 
   @Override
   public int getValue() {
-    return 5;
+    return 4;
   }
 
 }

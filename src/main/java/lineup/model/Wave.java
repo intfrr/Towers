@@ -2,13 +2,13 @@ package lineup.model;
 
 public class Wave {
 
-  private int interval;
+  private double interval;
   private int count;
   private int remaining;
   private Creep creep;
-  private int cooldown;
+  private double cooldown;
   
-  public Wave(int interval, int count, Creep creep) {
+  public Wave(double interval, int count, Creep creep) {
     this.interval = interval * 1000;
     this.cooldown = interval;
     this.count = count;
@@ -42,7 +42,7 @@ public class Wave {
     return count + " " + creep.getName();
   }
 
-  public int getInterval() {
+  public double getInterval() {
     return interval;
   }
 
