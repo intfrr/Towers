@@ -1,4 +1,4 @@
-package lineup.ui.util;
+package lineup.util.ui;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;

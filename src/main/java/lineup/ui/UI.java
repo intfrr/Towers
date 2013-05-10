@@ -15,7 +15,7 @@ import lineup.model.Bunker.BunkerType;
 import lineup.model.Creep;
 import lineup.model.Location;
 import lineup.model.Projectile;
-import lineup.ui.util.BunkerCursors;
+import lineup.util.ui.BunkerCursors;
 import lineup.world.World;
 
 public class UI {

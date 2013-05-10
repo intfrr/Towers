@@ -1,4 +1,4 @@
-package lineup.ui.util;
+package lineup.util.ui;
 
 import java.awt.Cursor;
 import java.awt.Point;

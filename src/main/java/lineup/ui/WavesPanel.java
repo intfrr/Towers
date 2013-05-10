@@ -3,8 +3,11 @@ package lineup.ui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.border.Border;
@@ -20,6 +23,9 @@ public class WavesPanel extends JPanel {
   private Font font9 = new Font("SansSerif", Font.PLAIN, 9);
   private Font fontBig = new Font("SansSerif", Font.PLAIN, 10);
   private SpringLayout layout;
+  
+  private Border border = BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), 
+      BorderFactory.createMatteBorder(0, 2, 0, 2, Color.DARK_GRAY));
   
   /**
    * Constructor.
@@ -51,6 +57,20 @@ public class WavesPanel extends JPanel {
     BunkerButton l = createButton(BunkerType.L, "Large Bunker $200", gameUi, 200);
     layout.putConstraint(SpringLayout.NORTH, l, 0, SpringLayout.NORTH, this);
     layout.putConstraint(SpringLayout.WEST, l, 5, SpringLayout.EAST, m);
+    
+    JButton help = new JButton("Help");
+    help.setFont(fontBig);
+    help.setBackground(Color.DARK_GRAY);
+    help.setForeground(Color.WHITE);
+    help.setBorder(border);
+    help.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        new HelpDialog().setVisible(true);
+      }
+    });
+    add(help);
+    layout.putConstraint(SpringLayout.NORTH, help, 0, SpringLayout.NORTH, this);
+    layout.putConstraint(SpringLayout.WEST, help, 15, SpringLayout.EAST, l);
   }
 
   private BunkerButton createButton(BunkerType type, String tooltip, UI gameUi, int costThreshold) {
@@ -59,8 +79,6 @@ public class WavesPanel extends JPanel {
     button.setFont(fontBig);
     button.setBackground(Color.DARK_GRAY);
     button.setForeground(Color.WHITE);
-    Border border = BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), 
-        BorderFactory.createMatteBorder(0, 2, 0, 2, Color.DARK_GRAY));
     button.setBorder(border);
     button.setActionCommand(type.name());
     button.addActionListener(new CreateBunkerListener(gameUi));

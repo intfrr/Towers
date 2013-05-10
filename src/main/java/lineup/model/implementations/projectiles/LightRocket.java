@@ -8,7 +8,7 @@ import java.awt.geom.AffineTransform;
 import lineup.model.Bunker;
 import lineup.model.Location;
 import lineup.model.Projectile;
-import lineup.ui.util.ImageLoader;
+import lineup.util.ui.ImageLoader;
 import lineup.util.math.Vector2D;
 
 public class LightRocket extends Projectile {

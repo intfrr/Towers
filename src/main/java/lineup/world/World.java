@@ -232,4 +232,10 @@ public class World {
     }
   }
 
+  public void removeBunker(Bunker bunker) {
+    synchronized (bunkers) {
+      bunkers.remove(bunker);
+    }
+  }
+
 }

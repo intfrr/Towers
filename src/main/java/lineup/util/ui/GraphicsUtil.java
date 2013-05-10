@@ -1,4 +1,4 @@
-package lineup.ui.util;
+package lineup.util.ui;
 
 import java.awt.FontMetrics;
 import java.awt.Graphics;

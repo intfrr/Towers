@@ -22,6 +22,7 @@ public abstract class BurstGun implements Arms {
   private int burstRemaining;
   private int burstInterval;
   private int burstCooldown;
+  private int burstReload;
   
   private Bunker owner;
   
@@ -39,6 +40,7 @@ public abstract class BurstGun implements Arms {
     if (targets.size() > 0) {
       
       if (burstRemaining > 0) {
+        burstReload = 0;
         burstRemaining--;
         burstCooldown = burstInterval;
         shots.add(createProjectile(location, targets.get(0)));
@@ -49,6 +51,11 @@ public abstract class BurstGun implements Arms {
         burstRemaining = burstSize;
         burstCooldown = burstInterval;
       }
+    } else if (burstReload >= reload) {
+      burstReload = 0;
+      cooldown = 0;
+      burstRemaining = burstSize;
+      burstCooldown = burstInterval;
     }
     return shots;
   }
@@ -75,6 +82,7 @@ public abstract class BurstGun implements Arms {
         burstCooldown = 0;
       }
     }
+    burstReload += elapsed;
   }
   
   public Bunker getOwner() {

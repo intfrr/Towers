@@ -44,6 +44,8 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
 
  - Added more creeps and waves
  - Added new nearest to base tracker
+ - Added sell button for bunkers
+ - Added help dialog
 
 ### TODO
 
@@ -55,4 +57,4 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
  - Multiple levels
  - Better art
  - Sounds
- - Help screen
+ - Help page details

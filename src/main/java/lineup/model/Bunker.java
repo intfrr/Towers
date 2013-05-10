@@ -9,7 +9,7 @@ import java.util.List;
 import lineup.model.implementations.bunkers.LargeBunker;
 import lineup.model.implementations.bunkers.MediumBunker;
 import lineup.model.implementations.bunkers.SmallBunker;
-import lineup.ui.util.ImageLoader;
+import lineup.util.ui.ImageLoader;
 import lineup.world.Renderable;
 import lineup.world.Updateable;
 import lineup.world.World;
@@ -140,6 +140,17 @@ public abstract class Bunker extends Storage implements Renderable, Updateable, 
     }
     bunker.setLocation(x, y);
     return bunker;
+  }
+
+  public int getSellValue() {
+    int val = cost;
+    if (arms != null) {
+      val += arms.getCost();
+    }
+    if (tracking != null) {
+      val += tracking.getCost();
+    }
+    return val/2;
   }
 
 }

@@ -18,7 +18,7 @@ import lineup.model.Arms;
 import lineup.model.Bunker;
 import lineup.model.TrackingSystem;
 import lineup.tech.TechTree;
-import lineup.ui.util.GraphicsUtil;
+import lineup.util.ui.GraphicsUtil;
 import lineup.world.Player;
 import lineup.world.World;
 
@@ -33,6 +33,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
   
   private JButton upgradeArms = new JButton("upgrade");
   private JButton upgradeTracker = new JButton("upgrade");
+  private JButton sell = new JButton("sell");
   
   /**
    * Constructor.
@@ -48,18 +49,31 @@ public class BunkerPanel extends JPanel implements ActionListener {
     SpringLayout layout = new SpringLayout();
     setLayout(layout);
     
+    Border border = BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), 
+        BorderFactory.createMatteBorder(0, 2, 0, 2, Color.DARK_GRAY));
+    
+    sell.setToolTipText("sell for half cost");
+    sell.setFont(font);
+    sell.setBackground(Color.DARK_GRAY);
+    sell.setForeground(Color.WHITE);
+    sell.setBorder(border);
+    sell.addActionListener(this);
+    sell.setVisible(false);
+    
+    add(sell);
+    layout.putConstraint(SpringLayout.NORTH, sell, 2, SpringLayout.NORTH, this);
+    layout.putConstraint(SpringLayout.EAST, sell, -5, SpringLayout.EAST, this);
+    
     upgradeArms.setToolTipText("Upgrade weapons");
     upgradeArms.setFont(font);
     upgradeArms.setBackground(Color.DARK_GRAY);
     upgradeArms.setForeground(Color.WHITE);
-    Border border = BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), 
-        BorderFactory.createMatteBorder(0, 2, 0, 2, Color.DARK_GRAY));
     upgradeArms.setBorder(border);
     upgradeArms.addActionListener(this);
     upgradeArms.setVisible(false);
     
     add(upgradeArms);
-    layout.putConstraint(SpringLayout.NORTH, upgradeArms, 48, SpringLayout.NORTH, this);
+    layout.putConstraint(SpringLayout.NORTH, upgradeArms, 58, SpringLayout.NORTH, this);
     layout.putConstraint(SpringLayout.EAST, upgradeArms, -5, SpringLayout.EAST, this);
     
     upgradeTracker.setToolTipText("Upgrade tracker");
@@ -71,13 +85,14 @@ public class BunkerPanel extends JPanel implements ActionListener {
     upgradeTracker.setVisible(false);
     
     add(upgradeTracker);
-    layout.putConstraint(SpringLayout.NORTH, upgradeTracker, 12, SpringLayout.NORTH, this);
+    layout.putConstraint(SpringLayout.NORTH, upgradeTracker, 22, SpringLayout.NORTH, this);
     layout.putConstraint(SpringLayout.EAST, upgradeTracker, -5, SpringLayout.EAST, this);
   }
 
   
   public void setBunker(Bunker bunker) {
     this.bunker = bunker;
+    sell.setVisible(bunker != null);
     upgradeArms.setVisible(bunker != null);
     upgradeTracker.setVisible(bunker != null);
     
@@ -106,22 +121,22 @@ public class BunkerPanel extends JPanel implements ActionListener {
     
     if (bunker.getTracking() == null) {
       g.setColor(Color.RED);
-      g.drawString("No tracking system", 5, 20);
+      g.drawString("No tracking system", 5, 30);
     } else {
       g.setColor(Color.YELLOW);
-      g.drawString(bunker.getTracking().getName(), 5, 20);
+      g.drawString(bunker.getTracking().getName(), 5, 30);
       g.setColor(Color.GRAY);
-      GraphicsUtil.drawWrappedString(g, bunker.getTracking().getDescription(), 6, 30, getWidth() - 50);
+      GraphicsUtil.drawWrappedString(g, bunker.getTracking().getDescription(), 6, 40, getWidth() - 50);
     }
     
     if (bunker.getArms() == null) {
       g.setColor(Color.RED);
-      g.drawString("No weapon system", 5, 50);
+      g.drawString("No weapon system", 5, 65);
     } else {
       g.setColor(Color.YELLOW);
-      g.drawString(bunker.getArms().getName(), 5, 55);
+      g.drawString(bunker.getArms().getName(), 5, 65);
       g.setColor(Color.GRAY);
-      GraphicsUtil.drawWrappedString(g, bunker.getArms().getDescription(), 6, 65, getWidth() - 50);
+      GraphicsUtil.drawWrappedString(g, bunker.getArms().getDescription(), 6, 75, getWidth() - 50);
     }
   }
 
@@ -131,6 +146,8 @@ public class BunkerPanel extends JPanel implements ActionListener {
       showArmsUpgradeMenu();
     } else if (evt.getSource() == upgradeTracker) {
       showTrackerUpgradeMenu();
+    } else if (evt.getSource() == sell) {
+      sellBunker();
     } else {
       String clazz = evt.getActionCommand();
       upgradeBunker(clazz);
@@ -189,6 +206,16 @@ public class BunkerPanel extends JPanel implements ActionListener {
     }
   }
 
+  private void sellBunker() {
+    if (bunker != null) {
+      World.getInstance().getPlayer().giveMoney(bunker.getSellValue());
+      World.getInstance().removeBunker(bunker);
+      bunker = null;
+      sell.setVisible(false);
+      upgradeArms.setVisible(false);
+      upgradeTracker.setVisible(false);
+    }
+  }
 
   private void upgradeTracker(Class<? extends TrackingSystem> c) {
     try {

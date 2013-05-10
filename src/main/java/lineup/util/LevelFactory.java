@@ -19,7 +19,7 @@ import lineup.model.Creep;
 import lineup.model.Level;
 import lineup.model.Location;
 import lineup.model.Wave;
-import lineup.ui.util.ImageLoader;
+import lineup.util.ui.ImageLoader;
 import lineup.util.config.CreepConfig;
 import lineup.util.config.LevelConfig;
 import lineup.util.config.MainConfig;

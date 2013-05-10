@@ -138,6 +138,10 @@ public class Vector2D {
     x += dx;
     y += dy;
   }
+  
+  public Location getEnd() {
+    return new Location(x + getDx(), y + getDy());
+  }
 
   public void add(Vector2D v) {
     double dx = getDx() + v.getDx();
@@ -146,6 +150,10 @@ public class Vector2D {
     
     Location end = new Location(x + dx, y + dy);
     pointAt(end);
+  }
+  
+  public double dot(Vector2D v) {
+    return getDx()*v.getDx() + getDy() + v.getDy();
   }
 
   public void scale(int scale) {
