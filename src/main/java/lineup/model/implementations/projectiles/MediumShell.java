@@ -37,7 +37,7 @@ public class MediumShell extends Projectile {
   }
 
   @Override
-  public int getDamage() {
+  public double getDamage() {
     return 6;
   }
 

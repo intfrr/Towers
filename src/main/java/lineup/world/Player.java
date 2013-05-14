@@ -20,16 +20,12 @@ public class Player {
     this.money = money;
   }
 
-  public void giveMoney(int value) {
-    synchronized (money) {
-      money += value;
-    }
+  public synchronized void giveMoney(int value) {
+    money += value;
   }
   
-  public void removeMoney(int cost) {
-    synchronized (money) {
-      money -= cost;
-    }
+  public synchronized void removeMoney(int cost) {
+    money -= cost;
   }
   
   public int getMoney() {

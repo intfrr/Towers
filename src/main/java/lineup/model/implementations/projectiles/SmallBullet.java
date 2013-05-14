@@ -39,7 +39,7 @@ public class SmallBullet extends Projectile {
   }
 
   @Override
-  public int getDamage() {
+  public double getDamage() {
     return 1;
   }
 

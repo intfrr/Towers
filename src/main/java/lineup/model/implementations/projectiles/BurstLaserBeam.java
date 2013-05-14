@@ -42,7 +42,7 @@ public class BurstLaserBeam extends Projectile {
   }
 
   @Override
-  public int getDamage() {
+  public double getDamage() {
     return 3;
   }
 

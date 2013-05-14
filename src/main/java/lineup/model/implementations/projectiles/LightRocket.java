@@ -47,7 +47,7 @@ public class LightRocket extends Projectile {
   }
 
   @Override
-  public int getDamage() {
+  public double getDamage() {
     return 5;
   }
 

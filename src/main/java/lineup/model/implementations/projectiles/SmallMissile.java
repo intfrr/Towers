@@ -66,7 +66,7 @@ public class SmallMissile extends Projectile {
   }
 
   @Override
-  public int getDamage() {
+  public double getDamage() {
     return 5;
   }
 

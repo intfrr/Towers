@@ -30,30 +30,43 @@
 			<tns:background>lvl1.jpg</tns:background>
 			<tns:waves>
 				<tns:wave sequence="1">
+					<tns:creepRef>smallspider</tns:creepRef>
+					<tns:interval>4</tns:interval>
+					<tns:count>8</tns:count>
+				</tns:wave>
+				<tns:wave sequence="2">
 					<tns:creepRef>blue</tns:creepRef>
 					<tns:interval>3</tns:interval>
 					<tns:count>10</tns:count>
 				</tns:wave>
-				<tns:wave sequence="2">
+				<tns:wave sequence="3">
 					<tns:creepRef>red</tns:creepRef>
 					<tns:interval>4</tns:interval>
 					<tns:count>12</tns:count>
 				</tns:wave>
-				<tns:wave sequence="3">
+				<tns:wave sequence="4">
 					<tns:creepRef>yellow</tns:creepRef>
 					<tns:interval>0.3</tns:interval>
 					<tns:count>30</tns:count>
 				</tns:wave>
-				<tns:wave sequence="4">
+				<tns:wave sequence="5">
 					<tns:creepRef>bg</tns:creepRef>
 					<tns:interval>10</tns:interval>
 					<tns:count>3</tns:count>
+				</tns:wave>
+				<tns:wave sequence="6">
+					<tns:creepRef>mothership</tns:creepRef>
+					<tns:interval>10</tns:interval>
+					<tns:count>1</tns:count>
 				</tns:wave>
 			</tns:waves>
 		</tns:level>
 	</tns:levels>
 	
 	<tns:creeps>
+		<tns:creep ref="smallspider">
+			<tns:fqName>lineup.model.implementations.creeps.SmallSpider</tns:fqName>
+		</tns:creep>
 		<tns:creep ref="blue">
 			<tns:fqName>lineup.model.implementations.creeps.BlueCreep</tns:fqName>
 		</tns:creep>
@@ -65,6 +78,9 @@
 		</tns:creep>
 		<tns:creep ref="bg">
 			<tns:fqName>lineup.model.implementations.creeps.BossGreen</tns:fqName>
+		</tns:creep>
+		<tns:creep ref="mothership">
+			<tns:fqName>lineup.model.implementations.creeps.Mothership</tns:fqName>
 		</tns:creep>
 	</tns:creeps>
 	

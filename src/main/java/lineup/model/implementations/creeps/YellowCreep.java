@@ -41,13 +41,18 @@ public class YellowCreep extends Creep {
   }
 
   @Override
-  public int getSize() {
+  public int getValue() {
+    return 4;
+  }
+
+  @Override
+  public int getWidth() {
     return size;
   }
 
   @Override
-  public int getValue() {
-    return 4;
+  public int getHeight() {
+    return size;
   }
 
 }

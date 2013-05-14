@@ -41,13 +41,18 @@ public class BossGreen extends Creep {
   }
 
   @Override
-  public int getSize() {
+  public int getValue() {
+    return 25;
+  }
+
+  @Override
+  public int getWidth() {
     return size;
   }
 
   @Override
-  public int getValue() {
-    return 25;
+  public int getHeight() {
+    return size;
   }
 
 }

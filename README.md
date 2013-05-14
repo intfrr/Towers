@@ -47,6 +47,11 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
  - Added sell button for bunkers
  - Added help dialog
 
+##### 14 May 2013
+
+ - Added flame thrower
+ - Added animated creeps
+
 ### TODO
 
  - Flesh out tech tree with a few more trackers and weapons

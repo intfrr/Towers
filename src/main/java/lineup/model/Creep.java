@@ -15,7 +15,7 @@ public abstract class Creep implements Renderable, Updateable {
 
   private Vector2D vector;
   private int maxHealth;
-  private int health;
+  private double health;
   private Deque<Location> route;
   private String name;
   
@@ -58,11 +58,11 @@ public abstract class Creep implements Renderable, Updateable {
   
   public void render(Graphics g) {
     if (health < maxHealth) {
-      int barsize = health * getSize() / maxHealth;
+      int barsize = (int)health * getWidth() / maxHealth;
       g.setColor(Color.GREEN);
-      g.fillRect((int)vector.getX(), (int)vector.getY() - 2, barsize, 1);
+      g.fillRect((int)vector.getX() - getWidth()/2, (int)vector.getY() - 2 - getHeight()/2, barsize, 1);
       g.setColor(Color.RED);
-      g.fillRect((int)vector.getX()+barsize, (int)vector.getY() - 2, getSize() - barsize, 1);
+      g.fillRect((int)vector.getX()+barsize-getWidth()/2, (int)vector.getY() - 2 - getHeight()/2, getWidth() - barsize, 1);
     }
     renderCreep(g);
   }
@@ -74,14 +74,14 @@ public abstract class Creep implements Renderable, Updateable {
   }
   
   public Location getCentreLocation() {
-    return new Location(vector.getX() + getSize()/2, vector.getY() + getSize()/2);
+    return new Location(vector.getX() + getWidth()/2, vector.getY() + getHeight()/2);
   }
 
-  public int getHealth() {
+  public double getHealth() {
     return health;
   }
   
-  public void setHealth(int health) {
+  public void setHealth(double health) {
     this.health = health;
   }
 
@@ -94,7 +94,7 @@ public abstract class Creep implements Renderable, Updateable {
   }
   
   public Rectangle getBoundingRect() {
-    return new Rectangle((int)vector.getX(), (int)vector.getY(), getSize(), getSize());
+    return new Rectangle((int)vector.getX(), (int)vector.getY(), getWidth(), getHeight());
   }
   
   public Vector2D getVector() {
@@ -103,7 +103,9 @@ public abstract class Creep implements Renderable, Updateable {
 
   public abstract Creep copy();
   
-  public abstract int getSize();
+  public abstract int getWidth();
+  
+  public abstract int getHeight();
   
   public abstract int getValue();
 

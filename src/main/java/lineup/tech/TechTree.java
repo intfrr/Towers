@@ -12,6 +12,7 @@ import lineup.model.implementations.arms.heavy.Cannon;
 import lineup.model.implementations.arms.special.CruiseLauncher;
 
 import lineup.model.implementations.arms.special.BurstLaser;
+import lineup.model.implementations.arms.special.Flamer;
 import lineup.model.implementations.arms.special.LightRocketLauncher;
 import lineup.model.implementations.arms.special.MultipleLauncher;
 import lineup.model.implementations.arms.special.PulseLaser;
@@ -110,6 +111,8 @@ public class TechTree {
     Arms plas = new PulseLaser(null);
     Arms blas = new BurstLaser(null);
     
+    Arms flam = new Flamer(null);
+    
     Node<Arms> lrlNode = new Node<Arms>(lrl);
     Node<Arms> mlNode = new Node<Arms>(ml);
     Node<Arms> clNode = new Node<Arms>(cl);
@@ -117,8 +120,11 @@ public class TechTree {
     Node<Arms> plasNode = new Node<Arms>(plas);
     Node<Arms> blasNode = new Node<Arms>(blas);
     
+    Node<Arms> flamNode = new Node<Arms>(flam);
+    
     lrlNode.addUpgrade(mlNode);
     lrlNode.addUpgrade(plasNode);
+    lrlNode.addUpgrade(flamNode);
     mlNode.addUpgrade(clNode);
     plasNode.addUpgrade(blasNode);
     
@@ -127,7 +133,7 @@ public class TechTree {
     armsMap.put(lrl.getClass(), lrlNode);
     armsMap.put(ml.getClass(), mlNode);
     armsMap.put(cl.getClass(), clNode);
-
+    armsMap.put(flam.getClass(), flamNode);
   }
 
   public Set<Arms> getUpgrades(Arms arms) {

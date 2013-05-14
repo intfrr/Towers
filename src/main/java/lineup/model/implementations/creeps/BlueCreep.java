@@ -10,6 +10,10 @@ import lineup.model.Location;
 
 public class BlueCreep extends Creep {
 
+  private int height = 6;
+  private int width = 6;
+  private Color color = Color.BLUE;
+  
   /**
    * Constructor.
    * @param route
@@ -17,14 +21,11 @@ public class BlueCreep extends Creep {
   public BlueCreep(List<Location> route) {
     super("Blue Creep", 20, 6, route);
   }
-
-  private int size = 6;
-  private Color color = Color.BLUE;
   
   @Override
   public void renderCreep(Graphics g) {
     g.setColor(color);
-    g.fillOval((int)getLocation().x, (int)getLocation().y, size, size);
+    g.fillOval((int)getLocation().x, (int)getLocation().y, width, height);
   }
 
   @Override
@@ -41,13 +42,18 @@ public class BlueCreep extends Creep {
   }
 
   @Override
-  public int getSize() {
-    return size;
+  public int getValue() {
+    return 5;
   }
 
   @Override
-  public int getValue() {
-    return 5;
+  public int getWidth() {
+    return width;
+  }
+
+  @Override
+  public int getHeight() {
+    return height;
   }
 
 }
