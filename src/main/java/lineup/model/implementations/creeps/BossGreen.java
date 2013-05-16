@@ -24,7 +24,7 @@ public class BossGreen extends Creep {
   @Override
   public void renderCreep(Graphics g) {
     g.setColor(color);
-    g.fillOval((int)getLocation().x, (int)getLocation().y, size, size);
+    g.fillOval((int)getLocation().x - size/2, (int)getLocation().y - size/2, size, size);
   }
 
   @Override
@@ -34,10 +34,7 @@ public class BossGreen extends Creep {
   
   @Override
   public Creep copy() {
-    BossGreen copy = new BossGreen(new LinkedList<Location>(getRoute()));
-    //System.out.println("Spawning " + copy + " with route " + copy.getRoute());
-
-    return copy;
+    return new BossGreen(new LinkedList<Location>(getRoute()));
   }
 
   @Override

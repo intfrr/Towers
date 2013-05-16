@@ -1,7 +1,7 @@
 package lineup.tech;
 
-import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,6 +15,7 @@ import lineup.model.implementations.arms.special.BurstLaser;
 import lineup.model.implementations.arms.special.Flamer;
 import lineup.model.implementations.arms.special.LightRocketLauncher;
 import lineup.model.implementations.arms.special.MultipleLauncher;
+import lineup.model.implementations.arms.special.NapalmLauncher;
 import lineup.model.implementations.arms.special.PulseLaser;
 import lineup.model.implementations.arms.light.GatlingGun;
 import lineup.model.implementations.arms.light.HeavyMG;
@@ -112,6 +113,7 @@ public class TechTree {
     Arms blas = new BurstLaser(null);
     
     Arms flam = new Flamer(null);
+    Arms nap = new NapalmLauncher(null);
     
     Node<Arms> lrlNode = new Node<Arms>(lrl);
     Node<Arms> mlNode = new Node<Arms>(ml);
@@ -121,12 +123,14 @@ public class TechTree {
     Node<Arms> blasNode = new Node<Arms>(blas);
     
     Node<Arms> flamNode = new Node<Arms>(flam);
+    Node<Arms> napNode = new Node<Arms>(nap);
     
     lrlNode.addUpgrade(mlNode);
     lrlNode.addUpgrade(plasNode);
     lrlNode.addUpgrade(flamNode);
     mlNode.addUpgrade(clNode);
     plasNode.addUpgrade(blasNode);
+    flamNode.addUpgrade(napNode);
     
     armsMap.put(plas.getClass(), plasNode);
     armsMap.put(blas.getClass(), blasNode);
@@ -134,11 +138,12 @@ public class TechTree {
     armsMap.put(ml.getClass(), mlNode);
     armsMap.put(cl.getClass(), clNode);
     armsMap.put(flam.getClass(), flamNode);
+    armsMap.put(nap.getClass(), napNode);
   }
 
   public Set<Arms> getUpgrades(Arms arms) {
     if (arms == null) {
-      Set<Arms> first = new HashSet<Arms>();
+      Set<Arms> first = new LinkedHashSet<Arms>();
       first.add(new AutoCannon(null));
       first.add(new LightMG(null));
       first.add(new LightRocketLauncher(null));
@@ -150,7 +155,7 @@ public class TechTree {
   
   public Set<TrackingSystem> getUpgrades(TrackingSystem tracker) {
     if (tracker == null) {
-      Set<TrackingSystem> first = new HashSet<TrackingSystem>();
+      Set<TrackingSystem> first = new LinkedHashSet<TrackingSystem>();
       first.add(new BasicTracker());
       return first;
     } else {

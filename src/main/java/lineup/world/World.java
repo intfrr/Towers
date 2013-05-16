@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import lineup.model.Blast;
 import lineup.model.Bunker;
 import lineup.model.Creep;
 import lineup.model.Level;
@@ -26,6 +27,7 @@ public class World {
   private List<Bunker> bunkers = new ArrayList<Bunker>();
   private List<Projectile> projectiles = new ArrayList<Projectile>();
   private List<Creep> creeps = new ArrayList<Creep>();
+  private List<Blast> blasts = new ArrayList<Blast>();
   
   private Level level;
   private int waveCooldown = 7000;
@@ -77,6 +79,10 @@ public class World {
   public void setCreeps(List<Creep> creeps) {
     this.creeps = creeps;
   }
+  
+  public List<Blast> getBlasts() {
+    return blasts;
+  }
 
   public Level getLevel() {
     return level;
@@ -93,6 +99,8 @@ public class World {
       }
     }
     
+    updateBlasts(elapsed);
+    
     for (Projectile p : projectiles) {
       p.update(elapsed);
     }
@@ -106,6 +114,16 @@ public class World {
     }
     
     collisionDetection();
+  }
+
+  private void updateBlasts(int elapsed) {
+    for (ListIterator<Blast> blit = blasts.listIterator(); blit.hasNext();) {
+      Blast blast = blit.next();
+      blast.update(elapsed);
+      if (blast.hasExpired()) {
+        blit.remove();
+      }
+    }
   }
 
   private void spawn(int elapsed) {
@@ -159,6 +177,9 @@ public class World {
       while (prit.hasNext()) {
         Projectile projectile = prit.next();
         if (creepRect.intersects(projectile.getBoundingRect())) {
+          if (projectile.getBlastSize() > 1) {
+            blasts.add(projectile.getBlast());
+          }
           prit.remove();
           creep.setHealth(creep.getHealth() - projectile.getDamage());
           if (creep.getHealth() <= 0) {

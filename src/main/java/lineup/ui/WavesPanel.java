@@ -47,7 +47,7 @@ public class WavesPanel extends JPanel {
     
     BunkerButton s = createButton(BunkerType.S, "Small Bunker $50", gameUi, 50);
     layout.putConstraint(SpringLayout.NORTH, s, 0, SpringLayout.NORTH, this);
-    layout.putConstraint(SpringLayout.WEST, s, 145, SpringLayout.WEST, this);
+    layout.putConstraint(SpringLayout.WEST, s, 165, SpringLayout.WEST, this);
     
     
     BunkerButton m = createButton(BunkerType.M, "Medium Bunker $100", gameUi, 100);
@@ -71,6 +71,11 @@ public class WavesPanel extends JPanel {
     add(help);
     layout.putConstraint(SpringLayout.NORTH, help, 0, SpringLayout.NORTH, this);
     layout.putConstraint(SpringLayout.WEST, help, 15, SpringLayout.EAST, l);
+    
+    WavesList wavesList = new WavesList();
+    add(wavesList);
+    layout.putConstraint(SpringLayout.SOUTH, wavesList, 0, SpringLayout.SOUTH, this);
+    layout.putConstraint(SpringLayout.WEST, wavesList, 0, SpringLayout.WEST, this);
   }
 
   private BunkerButton createButton(BunkerType type, String tooltip, UI gameUi, int costThreshold) {

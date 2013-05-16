@@ -4,23 +4,41 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 
+import lineup.model.Blast;
 import lineup.model.Bunker;
 import lineup.model.Location;
 import lineup.model.Projectile;
+import lineup.model.implementations.blasts.NapalmBlast;
 import lineup.util.math.Vector2D;
 
-public class MediumShell extends Projectile {
+public class NapalmShell extends Projectile {
 
-  private static double velocity = 65.0; 
-  private Color color = Color.RED;
+  private static double velocity = 40.0; 
+  private Color color = Color.GRAY;
   
-  public MediumShell(Bunker owner, int x, int y, double bearing) {
-    super(owner, new Vector2D(new Location(x, y), velocity, bearing), 3, 10);
+  /**
+   * Constructor.
+   * @param owner
+   * @param x
+   * @param y
+   * @param bearing
+   */
+  public NapalmShell(Bunker owner, int x, int y, double bearing) {
+    super(owner, new Vector2D(new Location(x, y), velocity, bearing), 3, 15);
   }
 
   public void render(Graphics g) {
     g.setColor(color);
     g.fillOval((int)getVector().getX(), (int)getVector().getY(), getSize(), getSize());
+  }
+
+  
+  
+  @Override
+  public Blast getBlast() {
+    double x = getVector().getX() - getSize()/2.0;
+    double y = getVector().getY() - getSize()/2.0;
+    return new NapalmBlast(x, y, getOwner());
   }
 
   /**
@@ -38,7 +56,7 @@ public class MediumShell extends Projectile {
 
   @Override
   public double getDamage() {
-    return 6;
+    return 0;
   }
 
 }

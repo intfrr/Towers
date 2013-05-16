@@ -4,12 +4,14 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SpringLayout;
 import javax.swing.WindowConstants;
 
+import lineup.model.Blast;
 import lineup.model.Bunker;
 import lineup.model.Bunker.BunkerType;
 import lineup.model.Creep;
@@ -67,7 +69,6 @@ public class UI {
   
   
   public void display(World world) {
-    //Graphics g = view.getGraphics();
     Graphics g = null;
     try {
       g = view.getBufferStrategy().getDrawGraphics();
@@ -76,6 +77,10 @@ public class UI {
       
       for (Bunker b : world.getBunkers()) {
         b.borderRender(g);
+      }
+      
+      for (Blast b : world.getBlasts()) {
+        b.render((Graphics2D)g);
       }
       
       for (Creep c : world.getCreeps()) {

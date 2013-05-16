@@ -39,7 +39,7 @@ public class Wave {
   
   @Override
   public String toString() {
-    return count + " " + creep.getName();
+    return remaining + " " + creep.getName();
   }
 
   public double getInterval() {

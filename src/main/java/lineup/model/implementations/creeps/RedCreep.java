@@ -24,7 +24,7 @@ public class RedCreep extends Creep {
   @Override
   public void renderCreep(Graphics g) {
     g.setColor(color);
-    g.fillOval((int)getLocation().x, (int)getLocation().y, size, size);
+    g.fillOval((int)getLocation().x - getWidth()/2, (int)getLocation().y - getHeight()/2, size, size);
   }
 
   @Override
@@ -34,10 +34,7 @@ public class RedCreep extends Creep {
   
   @Override
   public Creep copy() {
-    RedCreep copy = new RedCreep(new LinkedList<Location>(getRoute()));
-    //System.out.println("Spawning " + copy + " with route " + copy.getRoute());
-
-    return copy;
+    return new RedCreep(new LinkedList<Location>(getRoute()));
   }
 
   @Override

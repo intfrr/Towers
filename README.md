@@ -52,10 +52,18 @@ Got a reasonably good start with levels, creeps, bunkers and stuff. UI is basic 
  - Added flame thrower
  - Added animated creeps
 
+#### 16 May 2013
+
+ - Added display of coming waves, its a bit crappy though
+ - Projectiles now have blast area
+ - Added napalm cannon with a persistent blast area
+ - Refactored AnimatedCreep so each instance doesn't load its own images
+
 ### TODO
 
  - Flesh out tech tree with a few more trackers and weapons
  - Better UI - more stuff in the panels
+ - Bunker power usage
  - Ammo storage module
   - weapons consume ammo from storage
   - when storage is empty long cooldown to reload
