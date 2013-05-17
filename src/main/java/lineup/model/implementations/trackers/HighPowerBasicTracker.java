@@ -3,7 +3,7 @@ package lineup.model.implementations.trackers;
 public class HighPowerBasicTracker extends NearestSingleTargetTracker {
 
   public HighPowerBasicTracker() {
-    super(120);
+    super(120, 6, 9);
   }
 
   public String getName() {

@@ -13,8 +13,8 @@ import lineup.model.Target;
  * Generic projectile firing Arms that fires in bursts.
  * @author Neil
  */
-public abstract class BurstGun implements Arms {
-
+public abstract class BurstGun extends Arms {
+  
   private int reload;
   private int cooldown;
   
@@ -26,7 +26,17 @@ public abstract class BurstGun implements Arms {
   
   private Bunker owner;
   
-  public BurstGun(Bunker owner, int reload, int burstSize, int burstInterval) {
+  /**
+   * Constructor.
+   * @param owner
+   * @param reload
+   * @param burstSize
+   * @param burstInterval
+   * @param size
+   * @param power
+   */
+  public BurstGun(Bunker owner, int reload, int burstSize, int burstInterval, int size, int power) {
+    super(size, power);
     this.owner = owner;
     this.reload = reload;
     this.burstSize = burstSize;
@@ -35,6 +45,7 @@ public abstract class BurstGun implements Arms {
     this.burstCooldown = burstInterval;
   }
   
+  @Override
   public List<Projectile> fire(Location location, List<Target> targets) {
     List<Projectile> shots = new ArrayList<Projectile>();
     if (targets.size() > 0) {
@@ -62,10 +73,12 @@ public abstract class BurstGun implements Arms {
 
   public abstract Projectile createProjectile(Location location, Target target);
 
+  @Override
   public boolean isReady() {
     return cooldown == 0 && burstCooldown == 0;
   }
 
+  @Override
   public void cooldown(int elapsed) {
     if (cooldown > 0) {
       if (cooldown > elapsed) {

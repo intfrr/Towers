@@ -29,7 +29,6 @@ public class UI {
   public enum Mode {NORMAL, BUILD_BUNKER}
   private Mode mode = Mode.NORMAL;
   private Object modeObject;
-  
 
   /**
    * Constructor.
@@ -39,7 +38,7 @@ public class UI {
   public UI(int width, int height) {
     
     frame = new JFrame("Lineup");
-    frame.setSize(width, height+168);
+    frame.setSize(width, height+198);
     
     view = new Canvas();
     view.setSize(width, height);

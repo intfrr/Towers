@@ -18,7 +18,7 @@ public class MediumBunker extends Bunker {
    * Constructor.
    */
   public MediumBunker() {
-    super(15, 100);
+    super(15, 25, 100);
     sprite = loadSprite(BunkerType.M);
   }
 

@@ -17,7 +17,7 @@ public class BurstLaser extends BurstGun {
    * Constructor.
    */
   public BurstLaser(Bunker bunker) {
-    super(bunker, 5000, 5, 200);
+    super(bunker, 5000, 5, 200, 6, 12);
   }
 
   @Override
@@ -35,6 +35,13 @@ public class BurstLaser extends BurstGun {
 
   public String getDescription() {
     return "Laser that fires rapid laser bursts";
+  }
+
+  @Override
+  public double getDPS() {
+    double rate = (double)(5 * 1000)/(double)(5000 + (5*200));
+    double d = 3;
+    return rate * d;
   }
 
 }

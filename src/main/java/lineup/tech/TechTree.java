@@ -20,6 +20,7 @@ import lineup.model.implementations.arms.special.PulseLaser;
 import lineup.model.implementations.arms.light.GatlingGun;
 import lineup.model.implementations.arms.light.HeavyMG;
 import lineup.model.implementations.arms.light.LightMG;
+import lineup.model.implementations.arms.light.Militia;
 import lineup.model.implementations.trackers.BasicTracker;
 import lineup.model.implementations.trackers.HighPowerBasicTracker;
 import lineup.model.implementations.trackers.MediumPowerBasicTracker;
@@ -77,17 +78,21 @@ public class TechTree {
   private void buildLightTree() {
     Arms lmg = new LightMG(null);
     Arms hmg = new HeavyMG(null);
+    Arms mil = new Militia(null);
     Arms gg = new GatlingGun(null);
     
     Node<Arms> lmgNode = new Node<Arms>(lmg);
     Node<Arms> hmgNode = new Node<Arms>(hmg);
+    Node<Arms> milNode = new Node<Arms>(mil);
     Node<Arms> ggNode = new Node<Arms>(gg);
     
     lmgNode.addUpgrade(hmgNode);
-    hmgNode.addUpgrade(ggNode);
+    hmgNode.addUpgrade(milNode);
+    milNode.addUpgrade(ggNode);
     
     armsMap.put(lmg.getClass(), lmgNode);
     armsMap.put(hmg.getClass(), hmgNode);
+    armsMap.put(mil.getClass(), milNode);
     armsMap.put(gg.getClass(), ggNode);
   }
   

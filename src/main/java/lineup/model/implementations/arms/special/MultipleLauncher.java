@@ -21,7 +21,7 @@ public class MultipleLauncher extends MultiShotGun {
    * Constructor.
    */
   public MultipleLauncher(Bunker bunker) {
-    super(bunker, 5000);
+    super(bunker, 5000, 7, 7);
   }
 
   @Override
@@ -46,6 +46,12 @@ public class MultipleLauncher extends MultiShotGun {
 
   public String getDescription() {
     return "Missile launcher that fires several light missiles with limited homing";
+  }
+
+  @Override
+  public double getDPS() {
+    double d = new SmallMissile(null, 0, 0, 0, null).getDamage();
+    return d * 3.0 * 1000.0/5000.0;
   }
 
 }

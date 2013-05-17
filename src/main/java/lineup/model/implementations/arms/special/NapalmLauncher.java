@@ -6,6 +6,7 @@ import lineup.model.Projectile;
 import lineup.model.Target;
 import lineup.model.implementations.projectiles.NapalmShell;
 import lineup.model.implementations.arms.SingleShotGun;
+import lineup.model.implementations.blasts.NapalmBlast;
 import lineup.util.math.Vector2D;
 
 /**
@@ -18,7 +19,7 @@ public class NapalmLauncher extends SingleShotGun {
    * Constructor.
    */
   public NapalmLauncher(Bunker bunker) {
-    super(bunker, 4000);
+    super(bunker, 4000, 15, 8);
   }
 
   @Override
@@ -37,6 +38,11 @@ public class NapalmLauncher extends SingleShotGun {
 
   public String getDescription() {
     return "Napalm launcher, woo!";
+  }
+
+  @Override
+  public double getDPS() {
+    return new NapalmBlast(0, 0, null).calcDamage(1000);
   }
 
 }

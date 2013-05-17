@@ -69,7 +69,7 @@ public class Blast {
    * @param elapsed
    * @return
    */
-  private double calcDamage(int elapsed) {
+  public double calcDamage(int elapsed) {
     if (persistant) {
       double sec = (double)elapsed / 1000.0;
       return damage*sec;

@@ -14,14 +14,16 @@ import lineup.model.TrackingSystem;
  * the nearest one in range.
  * @author Neil
  */
-public abstract class NearestSingleTargetTracker implements TrackingSystem {
+public abstract class NearestSingleTargetTracker extends TrackingSystem {
 
   private final int range;
   
-  public NearestSingleTargetTracker(int range) {
+  public NearestSingleTargetTracker(int range, int size, int power) {
+    super(size, power);
     this.range = range;
   }
   
+  @Override
   public List<Target> getTargets(Location location, List<Creep> creeps) {
     if (creeps.isEmpty()) {
       return Collections.emptyList();
@@ -58,6 +60,7 @@ public abstract class NearestSingleTargetTracker implements TrackingSystem {
     return nearest;
   }
 
+  @Override
   public int getRange() {
     return range;
   }

@@ -3,8 +3,11 @@ package lineup.ui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,14 +22,18 @@ import lineup.model.Bunker;
 import lineup.model.TrackingSystem;
 import lineup.tech.TechTree;
 import lineup.util.ui.GraphicsUtil;
+import lineup.util.ui.ImageLoader;
 import lineup.world.Player;
 import lineup.world.World;
 
 public class BunkerPanel extends JPanel implements ActionListener {
 
   private static final long serialVersionUID = 7007533619332443955L;
-
+  private static Image background = ImageLoader.loadBackground("bunker.png");
+  
   private Font font = new Font("SansSerif", Font.PLAIN, 9);
+  private Font font2 = new Font("SansSerif", Font.BOLD, 11);
+  
   private Bunker bunker;
   private Player player = World.getInstance().getPlayer();
   private TechTree techTree = new TechTree();
@@ -35,13 +42,15 @@ public class BunkerPanel extends JPanel implements ActionListener {
   private JButton upgradeTracker = new JButton("upgrade");
   private JButton sell = new JButton("sell");
   
+  private DecimalFormat df = new DecimalFormat("#.#");
+  
   /**
    * Constructor.
    * @param width
    */
   public BunkerPanel(int width) {
     super();
-    setSize(width/2+20, 90);
+    setSize(width/2+10, 120);
     setPreferredSize(getSize());
     setBackground(Color.DARK_GRAY);
     setBorder(BorderFactory.createLoweredBevelBorder());
@@ -115,6 +124,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
 
   
   private void paintBunker(Graphics g) {
+    g.setFont(font);
     g.setColor(Color.WHITE);
     String title = bunker.getName() + " (" + bunker.getKills() + " kills)";
     g.drawString(title, 5, 10);
@@ -138,9 +148,33 @@ public class BunkerPanel extends JPanel implements ActionListener {
       g.setColor(Color.GRAY);
       GraphicsUtil.drawWrappedString(g, bunker.getArms().getDescription(), 6, 75, getWidth() - 50);
     }
+    
+    paintBunkerInfo(g);
   }
 
   
+  /**
+   * Paints the stats at the bottom of the bunker panel.
+   * @param g
+   */
+  private void paintBunkerInfo(Graphics g) {
+    g.drawImage(background, 2, 92, this);
+    
+    if (bunker != null) {
+      g.setColor(Color.GRAY);
+      g.setFont(font2);
+      g.drawString(String.valueOf(bunker.getFreePower()), 18, 113);
+      g.drawString(String.valueOf(bunker.freeSpace()), 63, 113);
+      if (bunker.getTracking() != null) {
+        g.drawString(String.valueOf(bunker.getTracking().getRange()), 104, 113);
+      }
+      if (bunker.getArms() != null) {
+        g.drawString(df.format(bunker.getArms().getDPS()), 138, 113);
+      }
+    }
+  }
+
+
   public void actionPerformed(ActionEvent evt) {
     if (evt.getSource() == upgradeArms) {
       showArmsUpgradeMenu();
@@ -159,14 +193,16 @@ public class BunkerPanel extends JPanel implements ActionListener {
     JPopupMenu popup = new JPopupMenu("Upgrade");
     
     for (Arms arms : techTree.getUpgrades(bunker.getArms())) {
-      JMenuItem item = new JMenuItem(arms.getName() + " $" + arms.getCost());
-      item.setToolTipText(arms.getDescription());
-      item.setActionCommand(arms.getClass().getCanonicalName());
-      item.addActionListener(this);
-      if (player.getMoney() < arms.getCost()) {
-        item.setEnabled(false);
+      if (bunker.canUpgrade(arms)) {
+        JMenuItem item = new JMenuItem(arms.getName() + " $" + arms.getCost());
+        item.setToolTipText(arms.getDescription());
+        item.setActionCommand(arms.getClass().getCanonicalName());
+        item.addActionListener(this);
+        if (player.getMoney() < arms.getCost()) {
+          item.setEnabled(false);
+        }
+        popup.add(item);
       }
-      popup.add(item);
     }
     
     popup.show(upgradeArms, -100, 0);
@@ -178,14 +214,16 @@ public class BunkerPanel extends JPanel implements ActionListener {
     JPopupMenu popup = new JPopupMenu("Upgrade");
     
     for (TrackingSystem tracker : techTree.getUpgrades(bunker.getTracking())) {
-      JMenuItem item = new JMenuItem(tracker.getName() + " $" + tracker.getCost());
-      item.setToolTipText(tracker.getDescription());
-      item.setActionCommand(tracker.getClass().getCanonicalName());
-      item.addActionListener(this);
-      if (player.getMoney() < tracker.getCost()) {
-        item.setEnabled(false);
+      if (bunker.canUpgrade(tracker)) {
+        JMenuItem item = new JMenuItem(tracker.getName() + " $" + tracker.getCost());
+        item.setToolTipText(tracker.getDescription());
+        item.setActionCommand(tracker.getClass().getCanonicalName());
+        item.addActionListener(this);
+        if (player.getMoney() < tracker.getCost()) {
+          item.setEnabled(false);
+        }
+        popup.add(item);
       }
-      popup.add(item);
     }
     
     popup.show(upgradeTracker, -100, 0);
@@ -194,7 +232,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
   
   private void upgradeBunker(String clazz) {
     try {
-      Class c = Class.forName(clazz);
+      Class<?> c = Class.forName(clazz);
       if (Arms.class.isAssignableFrom(c)) {
         upgradeArms(c);
       } else if (TrackingSystem.class.isAssignableFrom(c)) {
@@ -217,28 +255,50 @@ public class BunkerPanel extends JPanel implements ActionListener {
     }
   }
 
-  private void upgradeTracker(Class<? extends TrackingSystem> c) {
+  private void upgradeTracker(Class<?> c) {
     try {
-      TrackingSystem tracker = c.newInstance();
+      TrackingSystem tracker = (TrackingSystem)c.newInstance();
       player.removeMoney(tracker.getCost());
       bunker.setTracking(tracker);
-      upgradeTracker.setEnabled(!techTree.getUpgrades(bunker.getTracking()).isEmpty());
+      Set<TrackingSystem> upgrades = techTree.getUpgrades(bunker.getTracking());
+      upgradeTracker.setEnabled(!upgrades.isEmpty() && anyTrackersFit(upgrades));
     } catch (Exception ex) {
       throw new RuntimeException("Failed to create tracker for class " + c, ex);
     }
   }
 
 
-  private void upgradeArms(Class<? extends Arms> c) {
+  private boolean anyTrackersFit(Set<TrackingSystem> upgrades) {
+    for (TrackingSystem t : upgrades) {
+      if (bunker.canUpgrade(t)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  private void upgradeArms(Class<?> c) {
     try {
       Arms arms = (Arms) c.getConstructors()[0].newInstance(bunker);
       player.removeMoney(arms.getCost());
       bunker.setArms(arms);
-      upgradeArms.setEnabled(!techTree.getUpgrades(bunker.getArms()).isEmpty());
+      Set<Arms> upgrades = techTree.getUpgrades(bunker.getArms());
+      upgradeArms.setEnabled(!upgrades.isEmpty() && anyArmsFit(upgrades));
     } catch (Exception ex) {
       throw new RuntimeException("Failed to create arms for class " + c, ex);
     }
     
+  }
+
+
+  private boolean anyArmsFit(Set<Arms> upgrades) {
+    for (Arms a : upgrades) {
+      if (bunker.canUpgrade(a)) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

@@ -16,7 +16,7 @@ public class ControlPanel extends JPanel {
   
   public ControlPanel(int width, UI ui) {
     super();
-    setSize(width, 150);
+    setSize(width, 180);
     setPreferredSize(getSize());
     setBorder(BorderFactory.createRaisedBevelBorder());
     setBackground(Color.DARK_GRAY);

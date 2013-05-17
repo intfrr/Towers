@@ -28,10 +28,12 @@ public abstract class Projectile implements Renderable, Updateable {
   }
   
   /**
+   * Creates a projectile with a blast. Unless the <code>getBlast()</code>
+   * method is overriden a default blast is a circle and is non-persistent.
    * @param owner
    * @param v
-   * @param size
-   * @param blast
+   * @param size the size of the projectile
+   * @param blast the px size of the blast
    */
   public Projectile(Bunker owner, Vector2D v, int size, int blast) {
     this(owner, v, size);

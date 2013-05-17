@@ -27,8 +27,8 @@ public class NapalmBlast extends AnimatedBlast {
   public NapalmBlast(double x, double y, Bunker owner) {
     super(new Ellipse2D.Double(x-size/2, y-size/2, size, size), owner, 2.0, 4000);
     setPersistant(true);
-    setDamage(10);
-    setTtl(4000);
+    //setDamage(10);
+    //setTtl(4000);
     
     //Animation details
     setFrameCycleTime(200);

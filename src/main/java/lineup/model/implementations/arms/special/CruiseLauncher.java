@@ -19,7 +19,7 @@ public class CruiseLauncher extends SingleShotGun {
    * Constructor.
    */
   public CruiseLauncher(Bunker bunker) {
-    super(bunker, 8000);
+    super(bunker, 8000, 14, 10);
   }
 
   @Override
@@ -38,6 +38,12 @@ public class CruiseLauncher extends SingleShotGun {
 
   public String getDescription() {
     return "Missile launcher with a slow rate of fire. Fires powerful seeking cruise missiles";
+  }
+
+  @Override
+  public double getDPS() {
+    double d = new CruiseMissile(null, 0, 0, 0, null).getDamage();
+    return d * 1000.0/8000.0;
   }
 
 }

@@ -33,7 +33,7 @@ public class World {
   private int waveCooldown = 7000;
   private boolean onCooldown = true;
   
-  private Player player = new Player(10, 5000);
+  private Player player = new Player(100, 5000);
   
   private final int width;
   private final int height;
@@ -179,14 +179,16 @@ public class World {
         if (creepRect.intersects(projectile.getBoundingRect())) {
           if (projectile.getBlastSize() > 1) {
             blasts.add(projectile.getBlast());
+          } else {
+            creep.setHealth(creep.getHealth() - projectile.getDamage());
+            if (creep.getHealth() <= 0) {
+              player.giveMoney(creep.getValue());
+              projectile.getOwner().incrementKills();
+              crip.remove();
+              break;
+            }
           }
           prit.remove();
-          creep.setHealth(creep.getHealth() - projectile.getDamage());
-          if (creep.getHealth() <= 0) {
-            player.giveMoney(creep.getValue());
-            projectile.getOwner().incrementKills();
-            crip.remove();
-          }
         }
         
       }

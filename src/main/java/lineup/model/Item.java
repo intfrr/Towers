@@ -9,6 +9,14 @@ public class Item {
 
   private int size;
 
+  /**
+   * Constructor.
+   * @param size
+   */
+  public Item(int size) {
+    this.size = size;
+  }
+  
   public int getSize() {
     return size;
   }

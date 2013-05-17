@@ -20,7 +20,7 @@ public class StatsPanel extends JPanel {
   
   public StatsPanel(int width) {
     super();
-    setSize(width/2-40, 90);
+    setSize(width/2-40, 120);
     setPreferredSize(getSize());
     setBackground(Color.DARK_GRAY);
     setBorder(BorderFactory.createLoweredBevelBorder());

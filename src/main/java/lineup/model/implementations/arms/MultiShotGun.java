@@ -13,22 +13,23 @@ import lineup.model.Target;
  * Generic multiple projectile firing Arms.
  * @author Neil
  */
-public abstract class MultiShotGun implements Arms {
+public abstract class MultiShotGun extends Arms {
 
   private int reload;
   private int cooldown;
   private Bunker owner;
   
-  public MultiShotGun(Bunker owner, int reload) {
+  public MultiShotGun(Bunker owner, int reload, int size, int power) {
+    super(size, power);
     this.owner = owner;
     this.reload = reload;
     this.cooldown = 0;
   }
   
+  @Override
   public List<Projectile> fire(Location location, List<Target> targets) {
     List<Projectile> shots = new ArrayList<Projectile>();
     if (targets.size() > 0) {
-      //System.out.println("Firing");
       cooldown = reload;
       shots.addAll(createProjectile(location, targets.get(0)));
     }
@@ -37,10 +38,12 @@ public abstract class MultiShotGun implements Arms {
 
   public abstract List<Projectile> createProjectile(Location location, Target target);
 
+  @Override
   public boolean isReady() {
     return cooldown == 0;
   }
 
+  @Override
   public void cooldown(int elapsed) {
     if (cooldown > 0) {
       if (cooldown > elapsed) {
@@ -58,5 +61,6 @@ public abstract class MultiShotGun implements Arms {
   public void setOwner(Bunker bunker) {
     this.owner = bunker;
   }
+  
   
 }

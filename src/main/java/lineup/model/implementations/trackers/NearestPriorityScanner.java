@@ -12,9 +12,19 @@ import lineup.model.Target;
 import lineup.model.TrackingSystem;
 import lineup.util.NearestBaseComparator;
 
-public class NearestPriorityScanner implements TrackingSystem {
+public class NearestPriorityScanner extends TrackingSystem {
 
+  private int range;
+
+  /**
+   * Constructor.
+   * @param size
+   * @param power
+   * @param range
+   */
   public NearestPriorityScanner() {
+    super(4, 5);
+    this.range = 50;
   }
 
   public String getName() {
@@ -29,6 +39,7 @@ public class NearestPriorityScanner implements TrackingSystem {
     return "A short range radar that tracks the enemy nearest the base";
   }
 
+  @Override
   public List<Target> getTargets(Location location, List<Creep> creeps) {
     if (creeps.isEmpty()) {
       return Collections.emptyList();
@@ -50,11 +61,12 @@ public class NearestPriorityScanner implements TrackingSystem {
   
   private boolean inRange(Location me, Creep nearest) {
     double d = me.asPoint().distance(nearest.getCentreLocation().asPoint());
-    return d <= getRange();
+    return d <= range;
   }
 
+  @Override
   public int getRange() {
-    return 50;
+    return range;
   }
 
 }

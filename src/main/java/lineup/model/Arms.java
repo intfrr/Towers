@@ -2,10 +2,20 @@ package lineup.model;
 
 import java.util.List;
 
-public interface Arms extends Purchasable {
+public abstract class Arms extends PoweredItem implements Purchasable {
 
-  public List<Projectile> fire(Location location, List<Target> targets);
-  public boolean isReady();
-  public void cooldown(int elapsed);
+  /**
+   * Constructor.
+   * @param size
+   * @param power
+   */
+  public Arms(int size, int power) {
+    super(size, power);
+  }
+  
+  public abstract List<Projectile> fire(Location location, List<Target> targets);
+  public abstract boolean isReady();
+  public abstract void cooldown(int elapsed);
+  public abstract double getDPS();
   
 }

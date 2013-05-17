@@ -2,9 +2,18 @@ package lineup.model;
 
 import java.util.List;
 
-public interface TrackingSystem extends Purchasable {
+public abstract class TrackingSystem extends PoweredItem implements Purchasable {
   
-  public List<Target> getTargets(Location location, List<Creep> creeps);
-  public int getRange();
+  /**
+   * Constructor.
+   * @param size
+   * @param power
+   */
+  public TrackingSystem(int size, int power) {
+    super(size, power);
+  }
+  
+  public abstract List<Target> getTargets(Location location, List<Creep> creeps);
+  public abstract int getRange();
   
 }

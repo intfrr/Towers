@@ -15,11 +15,13 @@ import lineup.util.math.Vector2D;
  */
 public class Cannon extends SingleShotGun {
 
+  private static final int reload = 3000;
+  
   /**
    * Constructor.
    */
   public Cannon(Bunker bunker) {
-    super(bunker, 3000);
+    super(bunker, reload, 6, 3);
   }
 
   @Override
@@ -38,6 +40,13 @@ public class Cannon extends SingleShotGun {
 
   public String getDescription() {
     return "Basic cannon that fires shells in a straight line";
+  }
+
+  @Override
+  public double getDPS() {
+    MediumShell s = new MediumShell(null, 0, 0, 0);
+    double d = s.getDamage();
+    return d * 1000/reload;
   }
 
 }

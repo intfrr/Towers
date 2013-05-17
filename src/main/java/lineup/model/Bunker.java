@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.List;
 
+import lineup.exception.DoesntFitException;
 import lineup.model.implementations.bunkers.LargeBunker;
 import lineup.model.implementations.bunkers.MediumBunker;
 import lineup.model.implementations.bunkers.SmallBunker;
@@ -29,14 +30,17 @@ public abstract class Bunker extends Storage implements Renderable, Updateable, 
   private boolean selected;
   private int kills;
   private int cost;
+  private int power;
   
   /**
    * Constructor.
    * @param size
+   * @param power
    * @param cost
    */
-  public Bunker(int size, int cost) {
+  public Bunker(int size, int power, int cost) {
     super(size);
+    this.power = power;
     this.cost = cost;
   }
   
@@ -79,7 +83,13 @@ public abstract class Bunker extends Storage implements Renderable, Updateable, 
     return tracking;
   }
 
-  public void setTracking(TrackingSystem tracking) {
+  public void setTracking(TrackingSystem tracking) throws DoesntFitException {
+    remove(this.tracking);
+    try {
+      add(tracking);
+    } catch (DoesntFitException ex) {
+      add(this.tracking);
+    }
     this.tracking = tracking;
   }
 
@@ -87,7 +97,13 @@ public abstract class Bunker extends Storage implements Renderable, Updateable, 
     return arms;
   }
 
-  public void setArms(Arms arms) {
+  public void setArms(Arms arms) throws DoesntFitException {
+    remove(this.arms);
+    try {
+      add(arms);
+    } catch (DoesntFitException ex) {
+      add(this.arms);
+    }
     this.arms = arms;
   }
 
@@ -151,6 +167,39 @@ public abstract class Bunker extends Storage implements Renderable, Updateable, 
       val += tracking.getCost();
     }
     return val/2;
+  }
+
+  public int getFreePower() {
+    int free = power;
+    if (arms != null) {
+      free -= arms.getPower();
+    }
+    if (tracking != null) {
+      free -= tracking.getPower();
+    }
+    return free;
+  }
+
+  public boolean canUpgrade(TrackingSystem t) {
+    int pUsed = 0;
+    int sUsed = 0;
+    if (arms != null) {
+      pUsed += arms.getPower();
+      sUsed += arms.getSize();
+    }
+    return pUsed + t.getPower() <= power &&
+           sUsed + t.getSize() <= getSize();
+  }
+  
+  public boolean canUpgrade(Arms a) {
+    int pUsed = 0;
+    int sUsed = 0;
+    if (tracking != null) {
+      pUsed += tracking.getPower();
+      sUsed += tracking.getSize();
+    }
+    return pUsed + a.getPower() <= power &&
+           sUsed + a.getSize() <= getSize();
   }
 
 }

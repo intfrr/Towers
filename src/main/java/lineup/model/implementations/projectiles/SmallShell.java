@@ -15,7 +15,7 @@ public class SmallShell extends Projectile {
   private Color color = Color.RED;
   
   public SmallShell(Bunker owner, int x, int y, double bearing) {
-    super(owner, new Vector2D(new Location(x, y), velocity, bearing), 2, 5);
+    super(owner, new Vector2D(new Location(x, y), velocity, bearing), 2, 6);
   }
 
   public void render(Graphics g) {
@@ -38,7 +38,7 @@ public class SmallShell extends Projectile {
 
   @Override
   public double getDamage() {
-    return 3;
+    return 2.9;
   }
 
 }

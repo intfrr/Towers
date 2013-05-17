@@ -18,7 +18,7 @@ public class SmallBunker extends Bunker {
    * Constructor.
    */
   public SmallBunker() {
-    super(10, 50);
+    super(10, 10, 50);
     sprite = loadSprite(BunkerType.S);
   }
 

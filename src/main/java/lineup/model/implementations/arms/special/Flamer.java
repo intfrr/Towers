@@ -18,7 +18,7 @@ public class Flamer extends SingleShotGun {
    * Constructor.
    */
   public Flamer(Bunker bunker) {
-    super(bunker, 50);
+    super(bunker, 50, 10, 8);
   }
 
   @Override
@@ -42,6 +42,12 @@ public class Flamer extends SingleShotGun {
 
   public String getDescription() {
     return "Short range flame thrower.";
+  }
+
+  @Override
+  public double getDPS() {
+    double d = new FlameBall(null, 0, 0, 0).getDamage();
+    return d * 1000.0/50.0;
   }
 
 }

@@ -18,7 +18,7 @@ public class LightRocketLauncher extends SingleShotGun {
    * Constructor.
    */
   public LightRocketLauncher(Bunker bunker) {
-    super(bunker, 5000);
+    super(bunker, 5000, 4, 3);
   }
 
   @Override
@@ -42,6 +42,12 @@ public class LightRocketLauncher extends SingleShotGun {
 
   public String getDescription() {
     return "Rocket launcher with a medium rate of fire. Fires small rockets leading the target.";
+  }
+
+  @Override
+  public double getDPS() {
+    double d = new LightRocket(null, 0, 0, 0).getDamage();
+    return d * 1000.0/5000.0;
   }
 
 }

@@ -17,7 +17,7 @@ public class PulseLaser extends SingleShotGun {
    * Constructor.
    */
   public PulseLaser(Bunker bunker) {
-    super(bunker, 5000);
+    super(bunker, 5000, 10, 9);
   }
 
   @Override
@@ -35,6 +35,12 @@ public class PulseLaser extends SingleShotGun {
 
   public String getDescription() {
     return "Has a long reload, but fires a powerful beam";
+  }
+
+  @Override
+  public double getDPS() {
+    double d = 5;
+    return d * 1000.0/5000.0;
   }
 
 }

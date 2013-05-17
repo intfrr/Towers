@@ -18,7 +18,7 @@ public class LightMG extends BurstGun {
    * Constructor.
    */
   public LightMG(Bunker bunker) {
-    super(bunker, 3000, 4, 200);
+    super(bunker, 3000, 4, 200, 2, 2);
   }
 
   @Override
@@ -43,6 +43,14 @@ public class LightMG extends BurstGun {
 
   public String getDescription() {
     return "Light machine gun that fires short bursts. Is able to lead targets.";
+  }
+
+  @Override
+  public double getDPS() {
+    // dps = bullets/sec * damage/bullet
+    double rate = (double)(4 * 1000)/(double)(3000 + (4*200));
+    double d = new SmallBullet(null, 0, 0, 0).getDamage();
+    return rate * d;
   }
 
 }
