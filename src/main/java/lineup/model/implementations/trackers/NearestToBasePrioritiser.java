@@ -12,7 +12,7 @@ import lineup.model.Target;
 import lineup.model.TrackingSystem;
 import lineup.util.NearestBaseComparator;
 
-public class NearestPriorityScanner extends TrackingSystem {
+public abstract class NearestToBasePrioritiser extends TrackingSystem {
 
   private int range;
 
@@ -22,21 +22,9 @@ public class NearestPriorityScanner extends TrackingSystem {
    * @param power
    * @param range
    */
-  public NearestPriorityScanner() {
-    super(4, 5);
-    this.range = 50;
-  }
-
-  public String getName() {
-    return "Target analyser";
-  }
-
-  public int getCost() {
-    return 60;
-  }
-
-  public String getDescription() {
-    return "A short range radar that tracks the enemy nearest the base";
+  public NearestToBasePrioritiser(int range, int size, int power) {
+    super(size, power);
+    this.range = range;
   }
 
   @Override

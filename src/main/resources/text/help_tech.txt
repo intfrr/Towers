@@ -1,0 +1,5 @@
+There are three types of weapons; light, heavy and special. 
+Light weapons are good for small, fast enemies. They are accurate and fast firing. 
+Heavy weapons are good for large, slow enemies, or groups. They are inaccurate and slow firing, but do more damage and can damage multiple enemies. 
+Special weapons tend to have unique properties. 
+Each weapon can be upgraded within its own tech tree. 

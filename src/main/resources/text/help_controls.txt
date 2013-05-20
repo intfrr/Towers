@@ -1,0 +1,4 @@
+There are three types of bunkers and each has a specific size and power output. 
+You can only put things into a bunker so long as there is enough space and power for it. 
+When you build a bunker it is initially empty. You must install both a weapon and a tracking system for the bunker
+to be of any use.

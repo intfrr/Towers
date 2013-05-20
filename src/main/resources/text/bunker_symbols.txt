@@ -1,0 +1,1 @@
+Readout showing a bunkers remaining power, free space, range and damage

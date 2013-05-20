@@ -38,8 +38,8 @@ public class BunkerPanel extends JPanel implements ActionListener {
   private Player player = World.getInstance().getPlayer();
   private TechTree techTree = new TechTree();
   
-  private JButton upgradeArms = new JButton("upgrade");
-  private JButton upgradeTracker = new JButton("upgrade");
+  private JButton upgradeArms = new JButton("install");
+  private JButton upgradeTracker = new JButton("install");
   private JButton sell = new JButton("sell");
   
   private DecimalFormat df = new DecimalFormat("#.#");
@@ -262,6 +262,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
       bunker.setTracking(tracker);
       Set<TrackingSystem> upgrades = techTree.getUpgrades(bunker.getTracking());
       upgradeTracker.setEnabled(!upgrades.isEmpty() && anyTrackersFit(upgrades));
+      upgradeTracker.setText("upgrade");
     } catch (Exception ex) {
       throw new RuntimeException("Failed to create tracker for class " + c, ex);
     }
@@ -285,6 +286,7 @@ public class BunkerPanel extends JPanel implements ActionListener {
       bunker.setArms(arms);
       Set<Arms> upgrades = techTree.getUpgrades(bunker.getArms());
       upgradeArms.setEnabled(!upgrades.isEmpty() && anyArmsFit(upgrades));
+      upgradeArms.setText("upgrade");
     } catch (Exception ex) {
       throw new RuntimeException("Failed to create arms for class " + c, ex);
     }

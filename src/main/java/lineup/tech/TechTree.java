@@ -8,7 +8,9 @@ import java.util.Set;
 import lineup.model.Arms;
 import lineup.model.TrackingSystem;
 import lineup.model.implementations.arms.heavy.AutoCannon;
+import lineup.model.implementations.arms.heavy.BigBertha;
 import lineup.model.implementations.arms.heavy.Cannon;
+import lineup.model.implementations.arms.heavy.HeavyCannon;
 import lineup.model.implementations.arms.special.CruiseLauncher;
 
 import lineup.model.implementations.arms.special.BurstLaser;
@@ -21,10 +23,12 @@ import lineup.model.implementations.arms.light.GatlingGun;
 import lineup.model.implementations.arms.light.HeavyMG;
 import lineup.model.implementations.arms.light.LightMG;
 import lineup.model.implementations.arms.light.Militia;
+import lineup.model.implementations.trackers.BasicThreatAnalyser;
 import lineup.model.implementations.trackers.BasicTracker;
 import lineup.model.implementations.trackers.HighPowerBasicTracker;
+import lineup.model.implementations.trackers.HighPowerThreatAnalyser;
 import lineup.model.implementations.trackers.MediumPowerBasicTracker;
-import lineup.model.implementations.trackers.NearestPriorityScanner;
+import lineup.model.implementations.trackers.ThreatAnalyser;
 
 /**
  * Class that manages the tech tree for various things.
@@ -49,22 +53,17 @@ public class TechTree {
     TrackingSystem medPower = new MediumPowerBasicTracker();
     TrackingSystem hiPower = new HighPowerBasicTracker();
     
-    TrackingSystem nearest = new NearestPriorityScanner();
+    addTracker(basic, null);
+    addTracker(medPower, basic);
+    addTracker(hiPower, medPower);
     
-    Node<TrackingSystem> basicNode = new Node<TrackingSystem>(basic);
-    Node<TrackingSystem> medPowerNode = new Node<TrackingSystem>(medPower);
-    Node<TrackingSystem> hiPowerNode = new Node<TrackingSystem>(hiPower);
+    TrackingSystem nearest = new BasicThreatAnalyser();
+    TrackingSystem nearest2 = new ThreatAnalyser();
+    TrackingSystem nearest3 = new HighPowerThreatAnalyser();
     
-    Node<TrackingSystem> nNode = new Node<TrackingSystem>(nearest);
-    
-    basicNode.addUpgrade(medPowerNode);
-    basicNode.addUpgrade(nNode);
-    medPowerNode.addUpgrade(hiPowerNode);
-    
-    trackerMap.put(basic.getClass(), basicNode);
-    trackerMap.put(medPower.getClass(), medPowerNode);
-    trackerMap.put(hiPower.getClass(), hiPowerNode);
-    trackerMap.put(nearest.getClass(), nNode);
+    addTracker(nearest, basic);
+    addTracker(nearest2, nearest);
+    addTracker(nearest3, nearest2);
   }
 
   
@@ -81,33 +80,25 @@ public class TechTree {
     Arms mil = new Militia(null);
     Arms gg = new GatlingGun(null);
     
-    Node<Arms> lmgNode = new Node<Arms>(lmg);
-    Node<Arms> hmgNode = new Node<Arms>(hmg);
-    Node<Arms> milNode = new Node<Arms>(mil);
-    Node<Arms> ggNode = new Node<Arms>(gg);
-    
-    lmgNode.addUpgrade(hmgNode);
-    hmgNode.addUpgrade(milNode);
-    milNode.addUpgrade(ggNode);
-    
-    armsMap.put(lmg.getClass(), lmgNode);
-    armsMap.put(hmg.getClass(), hmgNode);
-    armsMap.put(mil.getClass(), milNode);
-    armsMap.put(gg.getClass(), ggNode);
+    addArms(lmg, null);
+    addArms(hmg, lmg);
+    addArms(mil, hmg);
+    addArms(gg, mil);
   }
+  
   
   private void buildHeavyTree() {
     Arms ac = new AutoCannon(null);
     Arms cannon = new Cannon(null);
+    Arms hvy = new HeavyCannon(null);
+    Arms big = new BigBertha(null);
     
-    Node<Arms> acNode = new Node<Arms>(ac);
-    Node<Arms> cannonNode = new Node<Arms>(cannon);
-    
-    acNode.addUpgrade(cannonNode);
-    
-    armsMap.put(cannon.getClass(), cannonNode);
-    armsMap.put(ac.getClass(), acNode);
+    addArms(ac, null);
+    addArms(cannon, ac);
+    addArms(hvy, cannon);
+    addArms(big, hvy);
   }
+  
 
   private void buildSpecialTree() {
     Arms lrl = new LightRocketLauncher(null);
@@ -120,31 +111,35 @@ public class TechTree {
     Arms flam = new Flamer(null);
     Arms nap = new NapalmLauncher(null);
     
-    Node<Arms> lrlNode = new Node<Arms>(lrl);
-    Node<Arms> mlNode = new Node<Arms>(ml);
-    Node<Arms> clNode = new Node<Arms>(cl);
-    
-    Node<Arms> plasNode = new Node<Arms>(plas);
-    Node<Arms> blasNode = new Node<Arms>(blas);
-    
-    Node<Arms> flamNode = new Node<Arms>(flam);
-    Node<Arms> napNode = new Node<Arms>(nap);
-    
-    lrlNode.addUpgrade(mlNode);
-    lrlNode.addUpgrade(plasNode);
-    lrlNode.addUpgrade(flamNode);
-    mlNode.addUpgrade(clNode);
-    plasNode.addUpgrade(blasNode);
-    flamNode.addUpgrade(napNode);
-    
-    armsMap.put(plas.getClass(), plasNode);
-    armsMap.put(blas.getClass(), blasNode);
-    armsMap.put(lrl.getClass(), lrlNode);
-    armsMap.put(ml.getClass(), mlNode);
-    armsMap.put(cl.getClass(), clNode);
-    armsMap.put(flam.getClass(), flamNode);
-    armsMap.put(nap.getClass(), napNode);
+    addArms(lrl, null);
+    addArms(ml, lrl);
+    addArms(cl, ml);
+    addArms(plas, lrl);
+    addArms(blas, plas);
+    addArms(flam, lrl);
+    addArms(nap, flam);
   }
+  
+  
+  private void addTracker(TrackingSystem t, TrackingSystem parent) {
+    Node<TrackingSystem> node = new Node<TrackingSystem>(t);
+    trackerMap.put(t.getClass(), node);
+    if (parent != null) {
+      Node<TrackingSystem> parentNode = trackerMap.get(parent.getClass());
+      parentNode.addUpgrade(node);
+    }
+  }
+  
+  
+  private void addArms(Arms a, Arms parent) {
+    Node<Arms> node = new Node<Arms>(a);
+    armsMap.put(a.getClass(), node);
+    if (parent != null) {
+      Node<Arms> parentNode = armsMap.get(parent.getClass());
+      parentNode.addUpgrade(node);
+    }
+  }
+
 
   public Set<Arms> getUpgrades(Arms arms) {
     if (arms == null) {

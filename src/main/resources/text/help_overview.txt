@@ -1,0 +1,3 @@
+Build towers and install weapons and tracking systems to defeat the waves of creeps trying to get to your base. 
+Tracking systems will track creeps and send targetting information to weapons. The range of your weapons, as well 
+as the targets they fire at, are determined by the tracking system installed in the bunker.

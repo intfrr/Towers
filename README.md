@@ -8,7 +8,8 @@ Tracking devices handle target selection and relay targets to the weapon, which 
 
 ### TODO
 
- - Flesh out tech tree with a few more trackers and weapons
+ - Review and finish tech tree
+ - Weapon balancing
  - Better UI - more stuff in the panels
  - Ammo storage module
   - weapons consume ammo from storage
@@ -17,6 +18,11 @@ Tracking devices handle target selection and relay targets to the weapon, which 
  - Better art
  - Sounds
  - Help page details
+
+#### 20 May 2013
+
+ - Added more heavy weapons and trackers
+ - Started on help page
 
 #### 17 May 2013
 

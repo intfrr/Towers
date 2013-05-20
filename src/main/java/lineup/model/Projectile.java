@@ -10,6 +10,8 @@ import lineup.world.Updateable;
 
 public abstract class Projectile implements Renderable, Updateable {
 
+  private static final int DEFAULT_BLAST_TIME = 60;
+  
   private Vector2D vector;
   private int size;
   private Bunker owner;
@@ -66,7 +68,7 @@ public abstract class Projectile implements Renderable, Updateable {
   
   public Blast getBlast() {
     Shape shape = new Ellipse2D.Double(vector.getX() - size/2 - blast/2, vector.getY() - size/2 - blast/2, blast, blast);
-    return new Blast(shape, owner, getDamage(), 40);
+    return new Blast(shape, owner, getDamage(), DEFAULT_BLAST_TIME);
   }
   
   public abstract double getDamage();
